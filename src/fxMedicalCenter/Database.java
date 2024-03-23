@@ -30,5 +30,26 @@ public class Database {
 			System.exit(0);
 		}
 	}
+	
+	// basic retrieval method to get an integer from the very first row of the
+		// selected
+		// data table in the selected column
+		public static int getInt(String dataTable, String ColumnName) {
+			int result = 0;
+
+			try {
+				// sets rs to search the data table to be read
+				rs = s.executeQuery("select * from " + dataTable + ";");
+				// moves the query to the first line of the table
+				rs.next();
+				// gets the integer value of the first row of the selected column
+				result = rs.getInt(ColumnName);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return result;
+		}
 }
 

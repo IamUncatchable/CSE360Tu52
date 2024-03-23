@@ -9,6 +9,7 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
+		Database data = new Database();
 		try {
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root,400,400);
@@ -22,6 +23,6 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
-		Database data = new Database();
+		
 	}
 }
