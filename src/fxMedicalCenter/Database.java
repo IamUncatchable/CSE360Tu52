@@ -4,11 +4,12 @@ import java.sql.*;
 
 public class Database {
 	// Basic global variables that are used at different instants
-	static Statement s;
-	static Connection c;
-	static ResultSet rs;
-	public static double totalPrice;
+	private Statement s;
+	private Connection c;
+	private ResultSet rs;
+	private String query;
 
+	
 	public Database() {
 		databaseconnect();
 	}
@@ -16,7 +17,7 @@ public class Database {
 	// This method connects the database as connection c and statement s which will
 	// be
 	// used throughout the database controller
-	private static void databaseconnect() {
+	private  void databaseconnect() {
 
 		try {
 			c = DriverManager.getConnection("jdbc:postgresql://98.177.250.239:5432/fxMedicalCenter","fxMedicalCenter" ,"thisclasssucks")
@@ -34,15 +35,10 @@ public class Database {
 	// basic retrieval method to get an integer from the very first row of the
 		// selected
 		// data table in the selected column
-		public static int getInt(String dataTable, String ColumnName) {
-			int result = 0;
+		public int getInt(String ColumnName) {
+			int result = -99999999;
 
 			try {
-				// sets rs to search the data table to be read
-				rs = s.executeQuery("select * from " + dataTable + ";");
-				// moves the query to the first line of the table
-				rs.next();
-				// gets the integer value of the first row of the selected column
 				result = rs.getInt(ColumnName);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -50,6 +46,102 @@ public class Database {
 			}
 
 			return result;
+		}
+		
+		public String getString(String ColumnName) {
+			String result = null;
+
+			try {
+				result = rs.getString(ColumnName);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return result;
+		}
+		
+		public void setQuery(String dataTable,String columnName,String value) {
+			query = "Select * FROM "+dataTable+" WHERE " + columnName + "=\'" + value+"\';";
+		}
+		
+		public void setQuery(String dataTable,String columnName,int value) {
+			query = "Select * FROM "+dataTable+" WHERE " + columnName + "=" + value+";";
+		}
+		
+		public void setEncodedQuery(String setQuery) {
+			query = setQuery;
+		}
+		
+		public void query() {
+			try {
+				rs = s.executeQuery(query);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		public boolean next() {
+			boolean successful = false;
+			try {
+				successful = rs.next();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return successful;
+		}
+		
+		public boolean updateInt(String dataTable,String uniqueColumn,String uniqueValue,String columnToUpdate,int newValue) {
+			boolean successful = false;
+			
+			try {
+				s.execute("Update " + dataTable + " set " + columnToUpdate + " = " + newValue + " where " + uniqueColumn + " = \'"+ uniqueValue +"\';");
+				successful = true;
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return successful;
+		}
+		
+		public boolean updateInt(String dataTable,String uniqueColumn,int uniqueValue,String columnToUpdate,int newValue) {
+			boolean successful = false;
+			
+			try {
+				s.execute("Update " + dataTable + " set " + columnToUpdate + " = " + newValue + " where " + uniqueColumn + " = "+ uniqueValue +";");
+				successful = true;
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return successful;
+		}
+		
+		public boolean updateString(String dataTable,String uniqueColumn,String uniqueValue,String columnToUpdate,String newValue) {
+			boolean successful = false;
+			
+			try {
+				s.execute("Update " + dataTable + " set " + columnToUpdate + " = \'" + newValue + "\' where " + uniqueColumn + " = \'"+ uniqueValue +"\';");
+				successful = true;
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return successful;
+		}
+		
+		public boolean updateString(String dataTable,String uniqueColumn,int uniqueValue,String columnToUpdate,String newValue) {
+			boolean successful = false;
+			
+			try {
+				s.execute("Update " + dataTable + " set " + columnToUpdate + " = \'" + newValue + "\' where " + uniqueColumn + " = "+ uniqueValue +";");
+				successful = true;
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return successful;
 		}
 }
 
