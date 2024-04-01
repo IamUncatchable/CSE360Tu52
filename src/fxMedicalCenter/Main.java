@@ -11,7 +11,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		Database data = new Database();
 		
-		data.setQuery("Patient", "patientid", "1");
+		data.setQuery("Patient", "patient_id", "1");
 		data.query();
 		
 		data.next();
