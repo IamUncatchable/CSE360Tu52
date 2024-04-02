@@ -104,6 +104,7 @@ public class Visit {
   
          Database database = new Database();
          database.setQuery("visits", "visit_id", visitID);
+         database.query();
 
          // this checks if the result set has data
          if (database.next()) {
