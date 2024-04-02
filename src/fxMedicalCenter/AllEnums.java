@@ -13,7 +13,8 @@ public enum AllEnums {
 	PATIENT_ID("patient_id"),
 	HISTORY("history"),
 	PHARMACY_DB("pharmacies"),
-	PATIENT_DB("patients");
+	PATIENT_DB("patients"),
+	VISIT_DB("visits");
 
 	private final String columnName;
 

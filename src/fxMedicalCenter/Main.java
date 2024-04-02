@@ -9,22 +9,7 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
-		Database data = new Database();
-		
-		data.setQuery("Patient", "patient_id", "1");
-		data.query();
-		
-		data.next();
-		System.out.println(data.getString("firstname"));
-		System.out.println(data.getInt("phone_number"));
-		
-		data.updateInt("patient", "patientid", "1", "phone_number", 123412);
-		data.updateString("patient","patientid", "1", "firstname", "newValue");
-		
-		
-		
-		
-		
+
 		
 		
 		

@@ -101,21 +101,22 @@ public class Visit {
     
     public void queryVisit(int id) throws SQLException 
     {
-    	 String query = "SELECT * FROM visits WHERE visit_id = " + visitID;
-         Database.rs = Database.s.executeQuery(query);
+  
+         Database database = new Database();
+         database.setQuery("visits", "visit_id", visitID);
 
          // this checks if the result set has data
-         if (Database.rs.next()) {
+         if (database.next()) {
              // this gets data from the result set and set it to object fields
-             this.patientID = Database.rs.getString("patient_id");
-             this.height = Database.rs.getInt("height");
-             this.weight = Database.rs.getInt("weight");
-             this.temp = Database.rs.getInt("temperature");
-             this.bloodPressure = Database.rs.getInt("blood_pressure");
-             this.nurseNotes = Database.rs.getString("nurse_notes");
-             this.drNotes = Database.rs.getString("dr_notes");
-             this.date = Database.rs.getInt("visit_date");
-             this.visitID = Database.rs.getInt("visit_id");
+             this.patientID = database.getString("patient_id");
+             this.height = database.getInt("height");
+             this.weight = database.getInt("weight");
+             this.temp = database.getInt("temperature");
+             this.bloodPressure = database.getInt("blood_pressure");
+             this.nurseNotes = database.getString("nurse_notes");
+             this.drNotes = database.getString("dr_notes");
+             this.date = database.getInt("visit_date");
+             this.visitID = database.getInt("visit_id");
          } else {
              System.out.println("Visit with ID " + visitID + " not found.");
          }
