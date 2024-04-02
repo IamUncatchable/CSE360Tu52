@@ -2,7 +2,7 @@
 package fxMedicalCenter;
 
 public class Patient {
-
+	
 	private String gender;
     private String address;
     private String city;
@@ -17,46 +17,6 @@ public class Patient {
     private String history;  
 	private Database db;
 	
-	
-	public enum PatientColumns {//should be moved to seperate enum class
-		GENDER("gender"),
-		ADDRESS("address"),
-		CITY("city"),
-		STATE("state"),
-		ZIP("zip"),
-		PHONE("phone"),
-		EMAIL("email"),
-		INSURANCE_NUMBER("insurance_id"),
-		INSURANCE_PROVIDER("insurance_provider"),
-		PATIENT_ID("patient_id"),
-		HISTORY("history");
-	
-		private final String columnName;
-
-		PatientColumns(String columnName) {
-			this.columnName = columnName;
-		}
-		
-		public String getColumnName() {
-			return columnName;
-		}
-	}
-	 public enum DatabaseSpecifiers{// should be moved to seperate enum class
-		 PHARMACY_DB("pharmacies"),
-		 PATIENT_DB("patients");
-		 
-		 private final String databaseName;
-
-		 DatabaseSpecifiers(String databaseName) {
-				this.databaseName = databaseName;
-			}
-			
-			public String getDatabaseSpecifiers() {
-				return databaseName;
-			}
-		 
-	 }
-	
     //default constructor
     public Patient() {
     	setPatient(patientID);//will be handled in controller class on action event.
@@ -64,19 +24,19 @@ public class Patient {
 	
     public void setPatient(String id){ //should be moved to controller class and pass to Data Access interface class to create and handle errors.
     	
-    	db.setQuery(DatabaseSpecifiers.PATIENT_DB.getDatabaseSpecifiers(), PatientColumns.PATIENT_ID.getColumnName(), id);
+    	db.setQuery(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), id);
     	db.query();
     	if (db.next()) {
-    		gender = db.getString(PatientColumns.GENDER.getColumnName());
-    		address = db.getString(PatientColumns.ADDRESS.getColumnName());
-    		city = db.getString(PatientColumns.CITY.getColumnName());
-    		state = db.getString(PatientColumns.STATE.getColumnName());
-    		zip = db.getInt(PatientColumns.ZIP.getColumnName());
-    		phone = db.getString(PatientColumns.PHONE.getColumnName());
-    		email = db.getString(PatientColumns.EMAIL.getColumnName());
-    		insuranceNumber = db.getInt(PatientColumns.INSURANCE_NUMBER.getColumnName());
-    		insuranceProvider = db.getString(PatientColumns.INSURANCE_PROVIDER.getColumnName());
-    		history = db.getString(PatientColumns.HISTORY.getColumnName());
+    		gender = db.getString(Columns.GENDER.get());
+    		address = db.getString(Columns.ADDRESS.get());
+    		city = db.getString(Columns.CITY.get());
+    		state = db.getString(Columns.STATE.get());
+    		zip = db.getInt(Columns.ZIP.get());
+    		phone = db.getString(Columns.PHONE_NUMBER.get());
+    		email = db.getString(Columns.EMAIL.get());
+    		insuranceNumber = db.getInt(Columns.INSURANCE_ID.get());
+    		insuranceProvider = db.getString(Columns.INSURANCE_PROVIDER.get());
+    		history = db.getString(Columns.HISTORY.get());
     		
     	}
     }

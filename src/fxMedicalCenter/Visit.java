@@ -103,21 +103,21 @@ public class Visit {
     {
   
          Database database = new Database();
-         database.setQuery("visits", "visit_id", visitID);
+         database.setQuery(Datatables.VISIT.get(),Columns.VISIT_ID.get(), visitID);
          database.query();
 
          // this checks if the result set has data
          if (database.next()) {
              // this gets data from the result set and set it to object fields
-             this.patientID = database.getString("patient_id");
-             this.height = database.getInt("height");
-             this.weight = database.getInt("weight");
-             this.temp = database.getInt("temperature");
-             this.bloodPressure = database.getInt("blood_pressure");
-             this.nurseNotes = database.getString("nurse_notes");
-             this.drNotes = database.getString("dr_notes");
-             this.date = database.getInt("visit_date");
-             this.visitID = database.getInt("visit_id");
+             this.patientID = database.getString(Columns.PATIENT_ID.get());
+             this.height = database.getInt(Columns.HEIGHT.get());
+             this.weight = database.getInt(Columns.WEIGHT.get());
+             this.temp = database.getInt(Columns.TEMP.get());
+             this.bloodPressure = database.getInt(Columns.BLOOD_PRESSURE.get());
+             this.nurseNotes = database.getString(Columns.NURSE_NOTES.get());
+             this.drNotes = database.getString(Columns.DR_NOTES.get());
+             this.date = database.getInt(Columns.DATE.get());
+             this.visitID = database.getInt(Columns.VISIT_ID.get());
          } else {
              System.out.println("Visit with ID " + visitID + " not found.");
          }
