@@ -10,6 +10,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		Database project = new Database();
+		
+		ReceptionistView view = new ReceptionistView();
+		view.start(primaryStage);
 
 		
 		
@@ -26,7 +29,7 @@ public class Main extends Application {
 		
 		
 		
-		try {
+		/*try {
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root,400,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -35,6 +38,7 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		*/
 	}
 	
 	public static void main(String[] args) {
