@@ -16,7 +16,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
@@ -24,27 +23,27 @@ import javafx.scene.shape.Line;
 public class DashboardTemplate {
 	
 	private BorderPane screen;
-  private GridPane grid;
-  private VBox leftBar;
-  private HBox topLeftTabs;
-  private static final String[] MENU_ITEMS = {"Dashboard", "My Account", "Messages", "Medical Records", "Appointments"};
-  private static final String LIGHT_GREEN = "-fx-background-color: #aedd94;";
-  private static final String DARK_GREEN = "-fx-background-color: #629c44;";
-  private static final String OFF_WHITE = "-fx-background-color: #F7F6F6;";
-  private static final String DASH_BANNER_FONT = "-fx-font-size: 24px;";
+    private GridPane grid;
+    private VBox leftBar;
+    private HBox topLeftTabs;
+    private static final String[] MENU_ITEMS = {"Dashboard", "My Account", "Messages", "Medical Records", "Appointments"};
+    private static final String LIGHT_GREEN = "-fx-background-color: #aedd94;";
+    private static final String DARK_GREEN = "-fx-background-color: #629c44;";
+    private static final String OFF_WHITE = "-fx-background-color: #F7F6F6;";
+    private static final String DASH_BANNER_FONT = "-fx-font-size: 24px;";
 	//constructor
 	public DashboardTemplate() {
-		   screen = new BorderPane();
-		   initializeScreen();
+		screen = new BorderPane();
+		initializeScreen();
 	}
 			
 	//buttons for left side bar
 	private Button createButton(String text) {
-      Button button = new Button(text);
-      button.setMaxWidth(Double.MAX_VALUE);
-      button.setOnAction(e -> setActivePage(text));
-      button.setStyle(LIGHT_GREEN);
-      return button;
+		Button button = new Button(text);
+        button.setMaxWidth(Double.MAX_VALUE);
+        button.setOnAction(e -> setActivePage(text));
+        button.setStyle(LIGHT_GREEN);
+        return button;
   }
 	
 	//function to move to other pages
@@ -52,7 +51,7 @@ public class DashboardTemplate {
 		
 	//actions to call the next page. probably a switch statement
 	
-		for (Button leftBarButton : leftBar.getChildren().stream().map(n -> (Button) n).toList()) {
+	for (Button leftBarButton : leftBar.getChildren().stream().map(n -> (Button) n).toList()) {
 	        if (leftBarButton.getText().equals(page)) {
 	            leftBarButton.setStyle(DARK_GREEN);//dark green
 	        } else {
@@ -68,23 +67,22 @@ public class DashboardTemplate {
 		// work on only the main elements of the 
 		//dash view that will stay the same on every page
 		grid = new GridPane();
-      leftBar = new VBox(5);
-      topLeftTabs = new HBox();
+        leftBar = new VBox(5);
+        topLeftTabs = new HBox();
 		
 		// page background color #F7F6F6
-      screen.setStyle(OFF_WHITE);
+        screen.setStyle(OFF_WHITE);
 		
 		// add logo image
 		// update path or place on web for access
 		// add resources folder to build path
 		// Minimalist_Hospital_and_Medical_Health_Logo.png
-		// FIXME image not aligned right need to adjust
 		ImageView logoView = new ImageView(new Image("/Minimalist_Hospital_and_Medical_Health_Logo.png"));
 		logoView.setFitHeight(160);
 		logoView.setFitWidth(160);
 		logoView.setPreserveRatio(true);
 		//place image in container
-		GridPane.setValignment(logoView, VPos.BOTTOM); //FIXME not having desired effect
+		GridPane.setValignment(logoView, VPos.BOTTOM); 
 		
 		//left sidebar vbox will go in (0,1) column 0, row 1		
 		leftBar.setSpacing(5);;
@@ -95,29 +93,22 @@ public class DashboardTemplate {
 			leftBar.getChildren().add(createButton(item));
 		}
 		
-		
 		// create tabs for home and logout
 		Button signOutButton = new Button("Sign Out"), homeButton = new Button("Home");
-      signOutButton.setStyle(LIGHT_GREEN + " -fx-background-radius: 15 15 0 0;");
+		signOutButton.setStyle(LIGHT_GREEN + " -fx-background-radius: 15 15 0 0;");
 		signOutButton.setPrefWidth(215);
-      homeButton.setStyle(LIGHT_GREEN + " -fx-background-radius: 15 15 0 0;");
+		homeButton.setStyle(LIGHT_GREEN + " -fx-background-radius: 15 15 0 0;");
 		homeButton.setPrefWidth(215);
-      topLeftTabs.getChildren().addAll(homeButton, signOutButton);
-
+        topLeftTabs.getChildren().addAll(homeButton, signOutButton);
 				
 		//add side art
-      ImageView sideArtView = new ImageView(new Image("/rightBar1.jpg"));
+        ImageView sideArtView = new ImageView(new Image("/rightBar1.jpg"));
 		sideArtView.setFitHeight(700);
 		sideArtView.setFitWidth(215);
 		sideArtView.setPreserveRatio(true);
 		
-		
-		
 		//align top left tabs
 		GridPane.setHalignment(topLeftTabs, HPos.RIGHT);
-		
-		//set up column and row constraints
-		
 		
 		// add page banner label
 		Label bannerLabel = new Label("This is different on every page");
@@ -127,8 +118,7 @@ public class DashboardTemplate {
 		VBox bannerBox = new VBox(10);
 		bannerBox.setAlignment(Pos.CENTER_LEFT);
 		bannerBox.getChildren().addAll(bannerLabel,bannerStylingLine );
-	
-				
+					
 		//apply padding and column constraints for gridpane
 		setupGridPane();
 		//add left side bar
@@ -145,15 +135,16 @@ public class DashboardTemplate {
 		screen.setCenter(grid);
 		
 	}
-	 private void setupGridPane() {
-	        grid.setPadding(new Insets(20));
-	        grid.getColumnConstraints().addAll(new ColumnConstraints(60), new ColumnConstraints(160), new ColumnConstraints(50),
-	                new ColumnConstraints(240), new ColumnConstraints(240), new ColumnConstraints(240), new ColumnConstraints(250));
-	        grid.getRowConstraints().addAll(new RowConstraints(50), new RowConstraints(60), new RowConstraints(60),
-	                new RowConstraints(60), new RowConstraints(230), new RowConstraints(230));
-	    }
+	
+    private void setupGridPane() {
+    grid.setPadding(new Insets(20));
+    grid.getColumnConstraints().addAll(new ColumnConstraints(60), new ColumnConstraints(160), new ColumnConstraints(50),
+        new ColumnConstraints(240), new ColumnConstraints(240), new ColumnConstraints(240), new ColumnConstraints(250));
+    grid.getRowConstraints().addAll(new RowConstraints(50), new RowConstraints(60), new RowConstraints(60),
+        new RowConstraints(60), new RowConstraints(230), new RowConstraints(230));
+}
 	
 	public Parent getView() {
-		   return screen;
-		}
+		return screen;
+	}
 }
