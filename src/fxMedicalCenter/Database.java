@@ -142,5 +142,18 @@ public class Database {
 			
 			return successful;
 		}
+		
+		public boolean createPatient(String gender,String address,String city,String state,int zip,String phone,String email,int insuranceNumber,String insuranceProvider,String getPharmacyInfo,String patientID,String history,String firstName, String lastName) {
+			boolean successful = false;
+			try {
+				
+				s.addBatch("INSERT INTO "+Datatables.PATIENT.get()+" VALUES ('"+patientID+"','"+gender+"','"+address+"','"+city+"','"+state+"','"+zip+"','"+phone+"','"+email+"','"+insuranceProvider+"','"+insuranceNumber+"','"+history+"','"+firstName+"','"+lastName+"');");
+				s.executeBatch();
+				successful = true;
+			}catch(SQLException e) {
+				successful = false;
+			}
+			return successful;
+		}
 }
 
