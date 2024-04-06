@@ -11,8 +11,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		Database project = new Database();
 		
-		ReceptionistView view = new ReceptionistView();
-		view.start(primaryStage);
+		
 
 		
 		

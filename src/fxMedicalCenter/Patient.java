@@ -8,18 +8,23 @@ public class Patient {
     private String city;
     private String state;
     private int zip;
-    private String phone;
+    private int phone;
     private String email;
     private int insuranceNumber; 
-    private String insuranceProvider;
-    private String getPharmacyInfo; 
+    private String insuranceProvider; 
     private String patientID;  
     private String history;  
 	private Database db;
+	private String firstName;
+	private String lastName;
 	
     //default constructor
     public Patient() {
     	setPatient(patientID);//will be handled in controller class on action event.
+    }
+    
+    public boolean newPatient() {
+    	return db.createPatient(gender, address, city, state, zip, phone, email, insuranceNumber, insuranceProvider, patientID, history,firstName,lastName);
     }
 	
     public void setPatient(String id){ //should be moved to controller class and pass to Data Access interface class to create and handle errors.
@@ -32,7 +37,7 @@ public class Patient {
     		city = db.getString(Columns.CITY.get());
     		state = db.getString(Columns.STATE.get());
     		zip = db.getInt(Columns.ZIP.get());
-    		phone = db.getString(Columns.PHONE_NUMBER.get());
+    		phone = db.getInt(Columns.PHONE_NUMBER.get());
     		email = db.getString(Columns.EMAIL.get());
     		insuranceNumber = db.getInt(Columns.INSURANCE_ID.get());
     		insuranceProvider = db.getString(Columns.INSURANCE_PROVIDER.get());
@@ -43,7 +48,26 @@ public class Patient {
     
     //getters and setters
      
-
+    //setter for first name
+    public void setFirstName(String firstName) {
+    	this.firstName = firstName;
+    }
+    
+    //getter for first name
+    public String getFirstName() {
+    	return firstName;
+    }
+    
+    //setter for last name
+    public void setLastName(String lastName) {
+    	this.lastName = lastName;
+    }
+    
+    //getter for last name
+    public String getLastName() {
+    	return lastName;
+    }
+    
     // Setter for gender
     public void setGender(String gender) {
         this.gender = gender;
@@ -95,12 +119,12 @@ public class Patient {
     }
 
     // Setter for phone
-    public void setPhone(String phone) {
+    public void setPhone(int phone) {
         this.phone = phone;
     }
 
     // Getter for phone
-    public String getPhone() {
+    public int getPhone() {
         return phone;
     }
 
@@ -132,16 +156,6 @@ public class Patient {
     // Getter for insurance provider
     public String getInsuranceProvider() {
         return insuranceProvider;
-    }
-
-    // Setter for pharmacy information
-    public void setGetPharmacyInfo(String getPharmacyInfo) {
-        this.getPharmacyInfo = getPharmacyInfo;
-    }
-
-    // Getter for pharmacy information
-    public String getGetPharmacyInfo() {
-        return getPharmacyInfo;
     }
 
     // Setter for patient ID

@@ -143,7 +143,7 @@ public class Database {
 			return successful;
 		}
 		
-		public boolean createPatient(String gender,String address,String city,String state,int zip,String phone,String email,int insuranceNumber,String insuranceProvider,String getPharmacyInfo,String patientID,String history,String firstName, String lastName) {
+		public boolean createPatient(String gender,String address,String city,String state,int zip,int phone,String email,int insuranceNumber,String insuranceProvider,String patientID,String history,String firstName, String lastName) {
 			boolean successful = false;
 			try {
 				
