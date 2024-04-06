@@ -4,7 +4,7 @@ public class Message {
 	private int messageID;
 	private String from;
 	private String to;
-	private int date;
+	private String date;
 	private String text;
 	
 	public Message() {

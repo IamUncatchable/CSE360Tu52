@@ -155,5 +155,17 @@ public class Database {
 			}
 			return successful;
 		}
+		
+		public boolean createVisit(String patientID, int visitID, String date) {
+			boolean successful = false;
+			try {
+				s.addBatch("INSERT INTO " + Datatables.VISIT.get()+" ("+Columns.PATIENT_ID.get()+","+Columns.VISIT_ID.get()+","+Columns.DATE.get()+ ")" + " VALUES ('"+patientID+"',"+visitID+",'"+date+"');");
+				s.executeBatch();
+				successful = true;
+			}catch(SQLException e) {
+				successful = false;
+			}
+			return successful;
+		}
 }
 

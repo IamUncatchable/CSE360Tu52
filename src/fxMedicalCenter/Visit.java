@@ -10,7 +10,7 @@ public class Visit {
 	private int bloodPressure; 
 	private String nurseNotes; 
 	private String drNotes; 
-	private int date;
+	private String date;
 	private String patientID; 
 	private int visitID; 
 	
@@ -24,8 +24,13 @@ public class Visit {
         this.bloodPressure = 0; 
         this.nurseNotes = ""; 
         this.drNotes = ""; 
-        this.date = 0; 
+        this.date = ""; 
         this.visitID = 0;
+    }
+    
+    public boolean saveNewVisit() {
+    	Database db = new Database();
+    	return db.createVisit(patientID, visitID, date);
     }
     
 	public Visit(String patientID)
@@ -87,7 +92,7 @@ public class Visit {
         return drNotes;
     }
 
-    public int getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -116,7 +121,7 @@ public class Visit {
              this.bloodPressure = database.getInt(Columns.BLOOD_PRESSURE.get());
              this.nurseNotes = database.getString(Columns.NURSE_NOTES.get());
              this.drNotes = database.getString(Columns.DR_NOTES.get());
-             this.date = database.getInt(Columns.DATE.get());
+             this.date = database.getString(Columns.DATE.get());
              this.visitID = database.getInt(Columns.VISIT_ID.get());
          } else {
              System.out.println("Visit with ID " + visitID + " not found.");
