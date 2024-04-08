@@ -11,7 +11,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		Database project = new Database();
 		
-		
+		DashboardBase dashboardView = new DashboardBase();
+        DashBoardBaseController dashboardController = new DashBoardBaseController(dashboardView);
 
 		
 		
