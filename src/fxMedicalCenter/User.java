@@ -6,17 +6,15 @@ public class User {
 	    // Attributes
         private String firstName;
         private String lastName;
-        private int birthday; // Consider using a more appropriate date type, like LocalDate
         private String username;
         private String password;
         private String accountType;
         private String patientID;
     
         // Constructor
-        public User(String fName, String lName, int birthday, String user, String pass, String accountType, String patientID) {
+        public User(String fName, String lName, String user, String pass, String accountType, String patientID) {
             this.firstName = fName;
             this.lastName = lName;
-            this.birthday = birthday;
             this.username = user;
             this.password = pass;
             this.accountType = accountType;
@@ -72,7 +70,6 @@ public class User {
             return "User{" +
                     "firstName='" + firstName + '\'' +
                     ", lastName='" + lastName + '\'' +
-                    ", birthday=" + birthday +
                     ", username='" + username + '\'' +
                     ", accountType='" + accountType + '\'' +
                     ", patientID='" + patientID + '\'' +
@@ -82,13 +79,20 @@ public class User {
         // Persistence Methods (placeholders)
         public void save() {
             // Implementation to save user details to a database 
+        	
+        	//NOTE USE UPDATE METHOD TO UPDATE ROWS. SEPARATE CREATE FUNCTION TO CREATE A NEW USER
+        	
         }
     
         public static User load(String username) {
             // Implementation to load user details from a database
             return null; // Placeholder
         }
-    
+        
+        public void createUser() {
+        	Database db = new Database();
+        	db.createUser(username, password, firstName, lastName, accountType, patientID);
+        }
         // More methods as needed...
 }
     

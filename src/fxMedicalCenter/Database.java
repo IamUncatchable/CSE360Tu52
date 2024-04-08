@@ -12,7 +12,7 @@ public class Database {
 	public Database() {
 		databaseconnect();
 	}
-
+	
 	// This method connects the database as connection c and statement s which will
 	// be
 	// used throughout the database controller
@@ -21,7 +21,7 @@ public class Database {
 		try {
 			c = DriverManager.getConnection("jdbc:postgresql://98.177.250.239:5432/fxMedicalCenter","fxMedicalCenter" ,"thisclasssucks")
 					;
-
+			
 			s = c.createStatement();
 			System.out.println("Connected to the database");
 		} catch (Exception e) {
@@ -143,11 +143,11 @@ public class Database {
 			return successful;
 		}
 		
-		public boolean createPatient(String gender,String address,String city,String state,int zip,int phone,String email,int insuranceNumber,String insuranceProvider,String patientID,String history,String firstName, String lastName) {
+		public boolean createPatient(String gender,String address,String city,String state,int zip,int phone,String email,int insuranceNumber,String insuranceProvider,String patientID,String history,String firstName, String lastName,String birthday) {
 			boolean successful = false;
 			try {
 				
-				s.addBatch("INSERT INTO "+Datatables.PATIENT.get()+" VALUES ('"+patientID+"','"+gender+"','"+address+"','"+city+"','"+state+"','"+zip+"','"+phone+"','"+email+"','"+insuranceProvider+"','"+insuranceNumber+"','"+history+"','"+firstName+"','"+lastName+"');");
+				s.addBatch("INSERT INTO "+Datatables.PATIENT.get()+" VALUES ('"+patientID+"','"+gender+"','"+address+"','"+city+"','"+state+"','"+zip+"','"+phone+"','"+email+"','"+insuranceProvider+"','"+insuranceNumber+"','"+history+"','"+firstName+"','"+lastName+"','"+birthday+"');");
 				s.executeBatch();
 				successful = true;
 			}catch(SQLException e) {
@@ -160,6 +160,43 @@ public class Database {
 			boolean successful = false;
 			try {
 				s.addBatch("INSERT INTO " + Datatables.VISIT.get()+" ("+Columns.PATIENT_ID.get()+","+Columns.VISIT_ID.get()+","+Columns.DATE.get()+ ")" + " VALUES ('"+patientID+"',"+visitID+",'"+date+"');");
+				s.executeBatch();
+				successful = true;
+			}catch(SQLException e) {
+				successful = false;
+			}
+			return successful;
+		}
+		
+		public boolean createPrescription(int prescriptionID,String date, String prescribed, int refills) {
+			boolean successful = false;
+			try {
+				s.addBatch("INSERT INTO " + Datatables.PRESCRIPTION.get()+" Values ("+prescriptionID+","+refills+",'"+prescribed+"','"+date+"');");
+				s.executeBatch();
+				successful = true;
+			}catch(SQLException e) {
+				successful = false;
+			}
+			return successful;
+		}
+		
+		public boolean createUser(String username,String password,String firstName,String lastName,String account_type,String patient_id) {
+			boolean successful = false;
+			try {
+				s.addBatch("INSERT into "+ Datatables.USERS.get()+" Values ('"+username+"','"+firstName+"','"+lastName+"','"+password+"','"+account_type+"','"+patient_id+"');");
+				s.executeBatch();
+				successful = true;
+			}catch(SQLException e) {
+				successful = false;
+			}
+			return successful;
+		}
+		
+		public boolean createMessage(int messageID,String from, String to, String text, String date) {
+			boolean successful = false;
+			
+			try {
+				s.addBatch("INSERT into "+ Datatables.MESSAGE.get()+" Values ("+messageID+",'"+from+"','"+to+"','"+text+"','"+date+"');");
 				s.executeBatch();
 				successful = true;
 			}catch(SQLException e) {

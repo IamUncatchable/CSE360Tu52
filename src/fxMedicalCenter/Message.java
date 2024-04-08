@@ -1,10 +1,12 @@
 package fxMedicalCenter;
 
+import java.time.LocalDate;
+
 public class Message {
 	private int messageID;
 	private String from;
 	private String to;
-	private String date;
+	private LocalDate date;
 	private String text;
 	
 	public Message() {
@@ -12,7 +14,8 @@ public class Message {
 	}
 	
 	public Message(String sender,String recipient, String message) {
-		
+		Database db = new Database();
+		db.createMessage(messageID, from, to, text, date.toString());
 	}
 	
 	public Message(int id) {
@@ -31,7 +34,7 @@ public class Message {
 		return to;
 	}
 	
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 	

@@ -17,6 +17,7 @@ public class Patient {
 	private Database db;
 	private String firstName;
 	private String lastName;
+	private String birthday;
 	
     //default constructor
     public Patient() {
@@ -24,7 +25,7 @@ public class Patient {
     }
     
     public boolean newPatient() {
-    	return db.createPatient(gender, address, city, state, zip, phone, email, insuranceNumber, insuranceProvider, patientID, history,firstName,lastName);
+    	return db.createPatient(gender, address, city, state, zip, phone, email, insuranceNumber, insuranceProvider, patientID, history,firstName,lastName,birthday);
     }
 	
     public void setPatient(String id){ //should be moved to controller class and pass to Data Access interface class to create and handle errors.
@@ -47,7 +48,15 @@ public class Patient {
     }
     
     //getters and setters
+    
+    public void setBirthday(String birthday) {
+    	this.birthday = birthday;
+    }
      
+    public String getBirthday() {
+    	return birthday;
+    }
+    
     //setter for first name
     public void setFirstName(String firstName) {
     	this.firstName = firstName;

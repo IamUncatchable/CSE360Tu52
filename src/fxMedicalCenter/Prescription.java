@@ -39,6 +39,7 @@ public class Prescription {
 
 	private void createPrescription() {
 		Database database = new Database();
+		database.createPrescription(id, date.toString(), prescribed, refills);
 	}
 	
 	private void retrievePrescription() {

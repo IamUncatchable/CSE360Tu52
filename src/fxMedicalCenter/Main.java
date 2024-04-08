@@ -9,12 +9,13 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
+		
+		
 		Database project = new Database();
 		
-		DashboardBase dashboardView = new DashboardBase();
-        DashBoardBaseController dashboardController = new DashBoardBaseController(dashboardView);
-
-		
+		//DashboardBase dashboardView = new DashboardBase();
+        //DashBoardBaseController dashboardController = new DashBoardBaseController(dashboardView);
+		project.createUser("Mason", "password", "Mason", "Adams", "patient", "0101_JohnDoe");
 		
 		
 		
