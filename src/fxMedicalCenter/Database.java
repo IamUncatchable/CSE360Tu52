@@ -2,6 +2,7 @@ package fxMedicalCenter;
 
 import java.sql.*;
 
+
 public class Database {
 	// Basic global variables that are used at different instants
 	private Statement s;
@@ -59,6 +60,7 @@ public class Database {
 
 			return result;
 		}
+		
 		
 		public void setQuery(String dataTable,String columnName,String value) {
 			query = "Select * FROM "+dataTable+" WHERE " + columnName + "=\'" + value+"\';";

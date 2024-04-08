@@ -1,7 +1,7 @@
 package fxMedicalCenter;
 
 public enum Columns {
-	MESSAGE("message"),
+	MESSAGE_ID("message_id"),
 	FROM("from"),
 	TO("to"),
 	DATE("date"),

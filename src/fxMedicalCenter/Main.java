@@ -15,7 +15,7 @@ public class Main extends Application {
 		
 		//DashboardBase dashboardView = new DashboardBase();
         //DashBoardBaseController dashboardController = new DashBoardBaseController(dashboardView);
-		project.createUser("Mason", "password", "Mason", "Adams", "patient", "0101_JohnDoe");
+		
 		
 		
 		
