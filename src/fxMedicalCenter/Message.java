@@ -31,7 +31,7 @@ public class Message {
 		return to;
 	}
 	
-	public int getDate() {
+	public String getDate() {
 		return date;
 	}
 	
