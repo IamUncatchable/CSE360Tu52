@@ -66,3 +66,9 @@
 	-fx-border-color: white;
 }
 
+.TextBox{
+	-fx-pref-width: 400px;
+	-fx-pref-height: 50px;
+	-fx-font: 24 Times;
+}
+

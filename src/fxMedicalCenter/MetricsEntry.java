@@ -17,6 +17,10 @@ public class MetricsEntry {
 	private Visit visit;
 	private User currentUser;
 	private Stage currentStage;
+	private TextField blood;
+	private TextField temp;
+	private TextField height;
+	private TextField weight;
 
 	private Patient patient;
 	
@@ -30,17 +34,24 @@ public class MetricsEntry {
 		HBox top = new HBox();
 		top.setAlignment(Pos.CENTER);
 		Label title = new Label(patient.getFirstName()+"'s Metrics today");
+		title.setTranslateY(250);
 		title.getStyleClass().add("title");
 		top.getChildren().add(title);
 		root.setTop(top);
 		
 		GridPane center = new GridPane();
+		center.setHgap(10);
+		center.setVgap(10);
 		center.setAlignment(Pos.CENTER);
 		VBox weightBox = new VBox();
 		weightBox.setAlignment(Pos.CENTER);
 		weightBox.setSpacing(10);
+		weightBox.maxWidth(200);
+		weightBox.minWidth(200);
 		Label weightLabel = new Label("Weight");
-		TextField weight = new TextField();
+		weightLabel.getStyleClass().add("defaultText");
+		weight = new TextField();
+		weight.getStyleClass().add("TextBox");
 		
 		weightBox.getChildren().add(0,weightLabel);
 		weightBox.getChildren().add(1,weight);
@@ -49,7 +60,9 @@ public class MetricsEntry {
 		heightBox.setAlignment(Pos.CENTER);
 		heightBox.setSpacing(10);
 		Label heightLabel = new Label("Height");
-		TextField height = new TextField();
+		heightLabel.getStyleClass().add("defaultText");
+		height = new TextField();
+		height.getStyleClass().add("TextBox");
 		
 		heightBox.getChildren().add(0,heightLabel);
 		heightBox.getChildren().add(1,height);
@@ -58,7 +71,9 @@ public class MetricsEntry {
 		tempBox.setAlignment(Pos.CENTER);
 		tempBox.setSpacing(10);
 		Label tempLabel = new Label("Temperature");
-		TextField temp = new TextField();
+		tempLabel.getStyleClass().add("defaultText");
+		temp = new TextField();
+		temp.getStyleClass().add("TextBox");
 		
 		tempBox.getChildren().add(0,tempLabel);
 		tempBox.getChildren().add(1,temp);
@@ -67,7 +82,9 @@ public class MetricsEntry {
 		bloodBox.setAlignment(Pos.CENTER);
 		bloodBox.setSpacing(10);
 		Label bloodLabel = new Label("Blood Pressure");
-		TextField blood = new TextField();
+		bloodLabel.getStyleClass().add("defaultText");
+		blood = new TextField();
+		blood.getStyleClass().add("TextBox");
 		
 		bloodBox.getChildren().add(0,bloodLabel);
 		bloodBox.getChildren().add(1,blood);
@@ -78,8 +95,22 @@ public class MetricsEntry {
 		center.add(tempBox,0,1);
 		center.add(bloodBox, 1, 1);
 		
+		HBox bottom = new HBox();
+		bottom.setAlignment(Pos.CENTER);
+		Button save = new Button();
+		save.setTranslateY(-150);
+		save.setText("Save Metrics");
+		save.getStyleClass().add("Button");
+		save.setOnAction (new EventHandler<>() {
+            public void handle(ActionEvent event) {
+            	saveMetrics();
+            }
+		});
+		bottom.getChildren().add(0,save);
 		
 		
+		
+		root.setBottom(bottom);
 		root.setCenter(center);
 		Scene scene = new Scene(root,currentStage.getWidth(),currentStage.getHeight());
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -87,4 +118,14 @@ public class MetricsEntry {
 		currentStage.show();
 
 	}
+	
+	private void saveMetrics() {
+		try {
+    		int patientWeight = Integer.parseInt(weight.getText());
+    		
+    	} catch (NumberFormatException e) {
+    		new Error("Invalid characters");
+    	}
+	}
+	
 }
