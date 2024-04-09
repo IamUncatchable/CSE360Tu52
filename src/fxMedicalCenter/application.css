@@ -7,3 +7,41 @@
 .title {
 	-fx-font: 24 Times;
 }
+/* Define the button styles */
+.button-tab-light-green {
+    -fx-background-color: #aedd94;
+    -fx-background-radius: 10 10 0 0;
+}
+
+.button-dark-green {
+    -fx-background-color: #629c44;
+}
+
+.button-transparent {
+    -fx-background-color: transparent;
+}
+.button-light-green {
+    -fx-background-color: #aedd94;
+}
+
+/* Define the mail header font style */
+.mail-header-font {
+    -fx-font-size: 16px;
+}
+
+/* Define the grid pane styles */
+.grid-pane-dark-green {
+    -fx-background-color: #629c44;
+}
+
+/*color for background of dashboard*/
+.dashboard-background-off-white {
+	-fx-background-color: #F7F6F6;
+}
+.dashboard-banner-font {
+	-fx-font-size: 24px;
+}
+.dashboard-card-font{
+	-fx-font-size: 16px;
+}
+/* Add additional CSS rules here */
