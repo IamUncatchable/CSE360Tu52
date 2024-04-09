@@ -18,18 +18,22 @@ import javafx.stage.Stage;
 public class NurseView {
 	private User currentUser;
 	private BorderPane root;
-	public NurseView() {
-		
+	private Stage currentStage;
+	private int sceneX = 1200;
+	private int sceneY = 800;
+	public NurseView(Stage currentStage) {
+		this.currentStage = currentStage;
 		root = new BorderPane();
 		Label waitingPatientsLabel = new Label("Waiting Patients");
 		waitingPatientsLabel.getStyleClass().add("title");
-		
-		
 		
 		VBox cardBox = new VBox();
 		cardBox.getStyleClass().add("scroll");
 		cardBox.setAlignment(Pos.TOP_CENTER);
 		cardBox.setSpacing(10);
+		cardBox.setMaxWidth(sceneX/2);
+		cardBox.setMinWidth(sceneX/2);
+		cardBox.setMinHeight(2*sceneY/3);
 		addWaitingPatientCards(cardBox);
 		
 		VBox centerBox = new VBox();
@@ -39,6 +43,10 @@ public class NurseView {
 		
 		
 		root.setCenter(centerBox);
+		Scene scene = new Scene(root,sceneX,sceneY);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		currentStage.setScene(scene);
+		currentStage.show();
 	}
 	
 	public BorderPane getView() {
@@ -70,11 +78,11 @@ public class NurseView {
 				Button card = new Button();
 				card.getStyleClass().add("Button");
 				card.setAlignment(Pos.CENTER);
-				//card.setMaxWidth((sceneX/2)-20);
+				card.setMaxWidth((sceneX/2)-20);
 				card.setText(fName + " " + lName);
 				card.setOnAction (new EventHandler<>() {
 		            public void handle(ActionEvent event) {
-		            	new MetricsEntry(thisVisit,currentUser);
+		            	new MetricsEntry(thisVisit,currentUser,currentStage);
 		            }
 				});
 				scroll.getChildren().add(card);
