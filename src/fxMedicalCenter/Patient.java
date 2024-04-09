@@ -21,7 +21,7 @@ public class Patient {
 	
     //default constructor
     public Patient() {
-    	setPatient(patientID);//will be handled in controller class on action event.
+    	setPatient(patientID);
     }
     
     public boolean newPatient() {

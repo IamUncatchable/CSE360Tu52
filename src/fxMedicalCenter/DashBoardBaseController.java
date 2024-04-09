@@ -54,6 +54,7 @@ public class DashBoardBaseController {
 		});
 		///more buttons and actions go here
 		//
+/*
 		dashboardView.getCurrentMedViewButton().setOnAction(event -> {
 			
 		});
@@ -72,7 +73,7 @@ public class DashBoardBaseController {
 		dashboardView.getMessagesComposeButton().setOnAction(event -> {
 			
 		});
-
+*/
 	}
 
 	// Method to switch scenes or update the dashboard view based on user
