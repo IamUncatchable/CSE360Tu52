@@ -11,12 +11,17 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		
 		
-		Database project = new Database();
+		//Database project = new Database();
 		
-		//DashboardBase dashboardView = new DashboardBase();
-        //DashBoardBaseController dashboardController = new DashBoardBaseController(dashboardView);
+		//new NurseView(primaryStage);
 		
-		new NurseView(primaryStage);
+		DashboardBase dashboardView = new DashboardBase();
+        DashBoardBaseController dashboardController = new DashBoardBaseController(dashboardView);
+        Scene scene = new Scene(dashboardView.getView(), 1366, 780);
+        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
 		
 		
 		
