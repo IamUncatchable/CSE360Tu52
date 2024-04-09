@@ -1,5 +1,6 @@
 package fxMedicalCenter;
 
+//controls actions of static dashboard items as well as the Dashboard home page
 
 
 
@@ -50,6 +51,26 @@ public class DashBoardBaseController {
 		dashboardBase.getSignOutButton().setOnAction(e -> {
 			// switchScene(DashboardEnumsRefactored.DASHBOARD.get());
 			// FIXME how to exit to the sign in screen?
+		});
+		///more buttons and actions go here
+		//
+		dashboardView.getCurrentMedViewButton().setOnAction(event -> {
+			
+		});
+		dashboardView.getCurrentMedRefillButton().setOnAction(event -> {
+			
+		});
+		dashboardView.getRequestRecordsButton().setOnAction(event -> {
+			
+		});
+		dashboardView.getRecentVisitsViewButton().setOnAction(event -> {
+			
+		});
+		dashboardView.getMessagesReadButton().setOnAction(event -> {
+			
+		});
+		dashboardView.getMessagesComposeButton().setOnAction(event -> {
+			
 		});
 
 	}

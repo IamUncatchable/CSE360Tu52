@@ -1,5 +1,5 @@
 package fxMedicalCenter;
-// this is jsut the cards of the dashboard home page should return
+// this is jsut the cards of the dashboard home page 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -17,6 +17,12 @@ public class DashboardView {
 	private static final String DASHBOARD_CARD_FONT = "dashboard-card-font";
 	private static final String BUTTON_STYLE_LIGHT_GREEN = "button-light-green";
 
+	Button currentMedViewButton;
+	Button currentMedRefillButton;
+	Button requestRecordsButton;
+	Button recentVisitsViewButton;
+	Button messagesReadButton;
+	Button messagesComposeButton;
 	
 	DashboardView(){
 		centerContent = new BorderPane();
@@ -31,12 +37,12 @@ public class DashboardView {
 		VBox messagesCard = new VBox();
 
 		// initialize and create buttons
-		Button currentMedViewButton = createCardButton("View");
-		Button currentMedRefillButton = createCardButton("Refill");
-		Button requestRecordsButton = createCardButton("Request");
-		Button recentVisitsViewButton = createCardButton("View All");
-		Button messagesReadButton = createCardButton("Read");
-		Button messagesComposeButton = createCardButton("Compose");
+		currentMedViewButton = createCardButton("View");
+		currentMedRefillButton = createCardButton("Refill");
+		requestRecordsButton = createCardButton("Request");
+		recentVisitsViewButton = createCardButton("View All");
+		messagesReadButton = createCardButton("Read");
+		messagesComposeButton = createCardButton("Compose");
 
 		// create labels for cards
 		Label currentMedsLabel = new Label("Current Medications");
@@ -113,13 +119,6 @@ public class DashboardView {
 	}
 	public BorderPane getCenterView() {
 		return centerContent;
-	}
-
-	public String getSideArt() {
-		return rightSideArt;
-	}
-	public String getBannerText() {
-		return bannerText; //FIXME needs to get name of user from database
 	}
 	
 }
