@@ -32,7 +32,9 @@ public enum Columns {
 	TEMP("temp"),
 	BLOOD_PRESSURE("blood_pressure"),
 	NURSE_NOTES("nurse_notes"),
-	DR_NOTES("dr_notes");
+	DR_NOTES("dr_notes"),
+	CHECKED_IN("checked_in"),
+	FINISHED("finished");
 	
 	private final String columnName;
 

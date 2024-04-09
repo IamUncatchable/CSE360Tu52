@@ -16,7 +16,7 @@ public class Main extends Application {
 		//DashboardBase dashboardView = new DashboardBase();
         //DashBoardBaseController dashboardController = new DashBoardBaseController(dashboardView);
 		
-		
+		new NurseView(primaryStage);
 		
 		
 		
