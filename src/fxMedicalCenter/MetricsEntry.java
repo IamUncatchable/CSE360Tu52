@@ -17,20 +17,25 @@ public class MetricsEntry {
 	private Visit visit;
 	private User currentUser;
 	private Stage currentStage;
-	private int sceneX = 1200;
-	private int sceneY = 800;
+
+	private Patient patient;
 	
-	public MetricsEntry(Visit visit,User currentUser,Stage currentStage) {
+	public MetricsEntry(Visit visit,User currentUser) {
 		this.visit = visit;
 		this.currentUser = currentUser;
-		this.currentStage = currentStage;
+		patient = new Patient();
+		patient.setPatient(visit.getPatientID());
 		BorderPane root = new BorderPane();
+		HBox top = new HBox();
+		top.setAlignment(Pos.CENTER);
+		Label title = new Label(patient.getFirstName()+"'s Metrics today");
+		title.getStyleClass().add("title");
+		top.getChildren().add(title);
+		root.setTop(top);
 		
-		
-		Scene scene = new Scene(root,sceneX,sceneY);
-		currentStage.setTitle("FX Medical Center");
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		currentStage.setScene(scene);
-		currentStage.show();
+		GridPane center = new GridPane();
+		VBox weightBox = new VBox();
+		TextField weight = new TextField();
+
 	}
 }

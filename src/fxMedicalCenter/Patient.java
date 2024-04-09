@@ -21,7 +21,7 @@ public class Patient {
 	
     //default constructor
     public Patient() {
-    	setPatient(patientID);
+    	db = new Database();
     }
     
     public boolean newPatient() {
@@ -43,7 +43,9 @@ public class Patient {
     		insuranceNumber = db.getInt(Columns.INSURANCE_ID.get());
     		insuranceProvider = db.getString(Columns.INSURANCE_PROVIDER.get());
     		history = db.getString(Columns.HISTORY.get());
-    		
+    		firstName = db.getString(Columns.FIRST_NAME.get());
+    		lastName = db.getString(Columns.LAST_NAME.get());
+    		birthday = db.getString(Columns.BIRTHDAY.get());
     	}
     }
     

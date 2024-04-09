@@ -15,31 +15,20 @@ public class Main extends Application {
 		
 		//Database project = new Database();
 		
-<<<<<<< Updated upstream
-		//new NurseView(primaryStage);
-=======
+		//new NurseView(pr);
 		//DashboardBase dashboardView = new DashboardBase();
         //DashBoardBaseController dashboardController = new DashBoardBaseController(dashboardView);
 		//Visit newVisit = new Visit("0101_JohnDoe",LocalDate.now());
 		//newVisit.saveNewVisit();
->>>>>>> Stashed changes
 		
 		DashboardBase dashboardView = new DashboardBase();
+		dashboardView.setCenter(new NurseView().getView());
         DashBoardBaseController dashboardController = new DashBoardBaseController(dashboardView);
         Scene scene = new Scene(dashboardView.getView(), 1366, 780);
         scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		
