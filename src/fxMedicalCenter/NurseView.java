@@ -2,6 +2,7 @@ package fxMedicalCenter;
 
 import java.util.ArrayList;
 
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,7 +19,9 @@ public class NurseView {
 	private User currentUser;
 	private int sceneX = 1200;
 	private int sceneY = 800;
+	private Stage currentStage;
 	public NurseView(Stage currentStage) {
+		this.currentStage = currentStage;
 		
 		BorderPane root = new BorderPane();
 		Label waitingPatientsLabel = new Label("Waiting Patients");
@@ -26,12 +29,13 @@ public class NurseView {
 		
 		
 		
-		ScrollPane cardBox = new ScrollPane();
+		VBox cardBox = new VBox();
 		cardBox.getStyleClass().add("scroll");
 		cardBox.setMaxWidth(sceneX/2);
 		cardBox.setMaxHeight((sceneY*2)/3);
 		cardBox.setMinHeight((sceneY*2)/3);
-		
+		cardBox.setAlignment(Pos.TOP_CENTER);
+		cardBox.setSpacing(10);
 		addWaitingPatientCards(cardBox);
 		
 		VBox centerBox = new VBox();
@@ -48,13 +52,41 @@ public class NurseView {
 		currentStage.show();
 	}
 	
-	private void addWaitingPatientCards(ScrollPane scroll){
-		ArrayList<String> patientIDs = new ArrayList<String>();
+	private void addWaitingPatientCards(VBox scroll){
+		ArrayList<Visit> visitIDs = new ArrayList<Visit>();
 		Database db = new Database();
-		db.setEncodedQuery("SELECT " + Columns.PATIENT_ID.get()+ " FROM " + Datatables.VISIT + " WHERE "+Columns.CHECKED_IN.get()+"=true, "+ Columns.FINISHED.get()+"=false;");
+		db.setEncodedQuery("SELECT * FROM " + Datatables.VISIT + " WHERE "+Columns.CHECKED_IN.get()+" AND NOT "+ Columns.FINISHED.get()+";");
 		db.query();
+		
+		
 		while(db.next()) {
-			patientIDs.add(db.getString(Columns.PATIENT_ID.get()));
+			//System.out.println("waiting");
+			int id = db.getInt(Columns.VISIT_ID.get());
+			Visit thisVisit = new Visit(id);
+			visitIDs.add(thisVisit);
+		}
+		int numCards = visitIDs.size();
+		for(int i = 0; i < numCards; i++) {
+			db.setQuery(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), visitIDs.get(i).getPatientID());
+			db.query();
+			if(db.next()) {
+				Visit thisVisit = visitIDs.get(i);
+				String fName = db.getString(Columns.FIRST_NAME.get());
+				String lName = db.getString(Columns.LAST_NAME.get());
+				//System.out.println(fName + lName);
+				Button card = new Button();
+				card.getStyleClass().add("Button");
+				card.setAlignment(Pos.CENTER);
+				card.setMaxWidth((sceneX/2)-20);
+				card.setText(fName + " " + lName);
+				card.setOnAction (new EventHandler<>() {
+		            public void handle(ActionEvent event) {
+		            	new MetricsEntry(thisVisit,currentUser,currentStage);
+		            }
+				});
+				scroll.getChildren().add(card);
+
+			}
 		}
 	}
 }

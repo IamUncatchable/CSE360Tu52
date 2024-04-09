@@ -18,7 +18,7 @@ public class Visit {
 	private boolean finished;
 	
 	//here is the constructor 
-    public void visit(String patientID,LocalDate date) 
+    public Visit(String patientID,LocalDate date) 
     {
         this.patientID = patientID;
         this.height = 0; 

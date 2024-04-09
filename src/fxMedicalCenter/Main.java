@@ -4,16 +4,25 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import java.time.LocalDate;
 
 
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		
+
 		
 		//Database project = new Database();
 		
+<<<<<<< Updated upstream
 		//new NurseView(primaryStage);
+=======
+		//DashboardBase dashboardView = new DashboardBase();
+        //DashBoardBaseController dashboardController = new DashBoardBaseController(dashboardView);
+		//Visit newVisit = new Visit("0101_JohnDoe",LocalDate.now());
+		//newVisit.saveNewVisit();
+>>>>>>> Stashed changes
 		
 		DashboardBase dashboardView = new DashboardBase();
         DashBoardBaseController dashboardController = new DashBoardBaseController(dashboardView);
