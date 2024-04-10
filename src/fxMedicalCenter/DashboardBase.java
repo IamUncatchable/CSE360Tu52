@@ -37,12 +37,14 @@ public class DashboardBase {
 			homeButton, signOutButton;
 	
 	private Stage currentStage; 
+	private User currentUser; 
 
 
 	// constructor
-	public DashboardBase(Stage stage) {
+	public DashboardBase(Stage stage, User user) {
 		
-		currentStage = stage; 
+		currentStage = stage;
+		currentUser = user; 
 		
 		screen = new BorderPane();
 		DashboardView dashboardViews = new DashboardView();
@@ -57,6 +59,10 @@ public class DashboardBase {
 	
 	public Stage getPrimaryStage() {
 		return currentStage;
+	}
+	
+	public User getUser() {
+		return currentUser; 
 	}
 	
     public void setCurrentStage(Stage currentStage) {

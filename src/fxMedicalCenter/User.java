@@ -30,6 +30,10 @@ public class User {
         }
     
         // Getters and Setters
+        public String getPatientID() {
+        	return patientID; 
+        }
+        
         public String getFirstName() {
             return firstName;
         }

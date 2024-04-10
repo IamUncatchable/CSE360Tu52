@@ -18,13 +18,11 @@ public class DashBoardBaseController {
 		this.dashboardBase = dashboardBase;
 
 		setupActionHandlers();
-//		setupSignOutHandler(); 
 	}
 
 
 	public void showView(String viewName) {
 	}
-
 	
 	
 
@@ -57,7 +55,6 @@ public class DashBoardBaseController {
 		dashboardBase.getSignOutButton().setOnAction(e -> {
 			
 			new LoginScreen(dashboardBase.getPrimaryStage());
-			
 			// switchScene(DashboardEnumsRefactored.DASHBOARD.get());
 			// FIXME how to exit to the sign in screen?
 		});
@@ -110,6 +107,8 @@ public class DashBoardBaseController {
 		case "My Account":
 			dashboardBase.setRightArt(RightBarImage.RIGHT_BAR_2.get());
 			dashboardBase.setBannerText(DashboardEnums.MY_ACCOUNT.get());
+			MyAccount account = new MyAccount(dashboardBase.getUser()); 
+			dashboardBase.setCenter(account.getView());
 			break;
 		case "Messages":
 			dashboardBase.setRightArt(RightBarImage.RIGHT_BAR_3.get());

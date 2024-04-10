@@ -140,7 +140,7 @@ public class LoginScreen {
 				new NurseView(currentStage,currentUser);
 				break;
 			case "patient":
-				DashboardBase dashboardView = new DashboardBase(currentStage);
+				DashboardBase dashboardView = new DashboardBase(currentStage, currentUser);
 		        DashBoardBaseController dashboardController = new DashBoardBaseController(dashboardView);
 		        Scene scene = new Scene(dashboardView.getView(), 1366, 780);
 		        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
