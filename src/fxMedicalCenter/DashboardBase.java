@@ -1,11 +1,15 @@
 package fxMedicalCenter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
@@ -35,31 +40,43 @@ public class DashboardBase {
 	private ImageView sideArtView;
 	private Button dashboardButton, myAccountButton, messagesButton, medicalRecordsButton, appointmentsButton,
 			homeButton, signOutButton;
+<<<<<<< Updated upstream
 	
 	private Stage currentStage; 
 	private User currentUser; 
+=======
+>>>>>>> Stashed changes
 
+	private Stage currentStage;
 
 	// constructor
+<<<<<<< Updated upstream
 	public DashboardBase(Stage stage, User user) {
 		
 		currentStage = stage;
 		currentUser = user; 
+=======
+	//public DashboardBase(Stage stage) {
+	
+		//currentStage = stage;
+	public DashboardBase() {
+>>>>>>> Stashed changes
 		
 		screen = new BorderPane();
 		DashboardView dashboardViews = new DashboardView();
 
 		this.centerContent = dashboardViews.getCenterView();
-		
+
 		initializeButtons();
 		initializeBanner();
 		initializeRightArt();
 		initializeScreen();
 	}
-	
+
 	public Stage getPrimaryStage() {
 		return currentStage;
 	}
+<<<<<<< Updated upstream
 	
 	public User getUser() {
 		return currentUser; 
@@ -72,6 +89,16 @@ public class DashboardBase {
     public void setSignOutAction(EventHandler<ActionEvent> eventHandler) {
         signOutButton.setOnAction(eventHandler);
     }
+=======
+
+	public void setCurrentStage(Stage currentStage) {
+		this.currentStage = currentStage;
+	}
+
+	public void setSignOutAction(EventHandler<ActionEvent> eventHandler) {
+		signOutButton.setOnAction(eventHandler);
+	}
+>>>>>>> Stashed changes
 
 	private void initializeScreen() {
 		// use gridpane grid to arrange elements
@@ -107,11 +134,11 @@ public class DashboardBase {
 		messagesButton = createButton(DashboardEnums.MESSAGES.get());
 		medicalRecordsButton = createButton(DashboardEnums.MEDICAL_RECORDS.get());
 		appointmentsButton = createButton(DashboardEnums.APPOINTMENTS.get());
-		
+
 	}
-	
+
 	private void handleSignOut() {
-		new LoginScreen(currentStage); 
+		// new LoginScreen(currentStage);
 	}
 
 	// buttons and actions for left side bar
@@ -145,9 +172,9 @@ public class DashboardBase {
 		GridPane grid = new GridPane();
 		grid.setPadding(new Insets(20));
 		grid.getColumnConstraints().addAll(new ColumnConstraints(60), new ColumnConstraints(160),
-				new ColumnConstraints(40), new ColumnConstraints(270, 270, Double.MAX_VALUE),
-				new ColumnConstraints(270, 270, Double.MAX_VALUE), new ColumnConstraints(270, 270, Double.MAX_VALUE),
-				new ColumnConstraints(230));
+				new ColumnConstraints(40), new ColumnConstraints(230, 230, Double.MAX_VALUE),
+				new ColumnConstraints(250, 250, Double.MAX_VALUE), new ColumnConstraints(250, 250, Double.MAX_VALUE),
+				new ColumnConstraints(40), new ColumnConstraints(230));
 		grid.getRowConstraints().addAll(new RowConstraints(20), new RowConstraints(60), new RowConstraints(60),
 				new RowConstraints(60), new RowConstraints(230), new RowConstraints(230));
 		return grid;
@@ -159,9 +186,8 @@ public class DashboardBase {
 		leftBar.setSpacing(5);
 		leftBar.setAlignment(Pos.CENTER_LEFT);
 
-
 		// add children to left bar
-		
+
 		leftBar.getChildren().addAll(dashboardButton, myAccountButton, messagesButton, medicalRecordsButton,
 				appointmentsButton);
 
@@ -206,7 +232,7 @@ public class DashboardBase {
 		// right side art
 
 		// add right side art
-		grid.add(sideArtView, 6, 1, 1, 5);
+		grid.add(sideArtView, 7, 1, 1, 5);
 
 		// add logo image
 		// update path or place on web for access
@@ -221,7 +247,7 @@ public class DashboardBase {
 		// add logo
 		grid.add(logoView, 1, 1, 1, 3);
 	}
-	
+
 	// returns assembled screen to MainApp
 
 	public Parent getView() {
@@ -259,7 +285,8 @@ public class DashboardBase {
 	}
 
 	// dynamic setters
-	public void setCenter(BorderPane centerContentIn) {
+	public void setCenter(Pane centerContentIn) {
+		clearContentFromPosition(grid, 3, 4, 3, 2);
 		grid.add(centerContentIn, 3, 4, 3, 2);
 	}
 
@@ -273,4 +300,15 @@ public class DashboardBase {
 
 	}
 
+	private void clearContentFromPosition(GridPane grid, int col, int row, int colSpan, int rowSpan) {
+		List<Node> nodesToRemove = new ArrayList<>();
+		for (Node node : grid.getChildren()) {
+			Integer rowIndex = GridPane.getRowIndex(node) == null ? 0 : GridPane.getRowIndex(node);
+			Integer colIndex = GridPane.getColumnIndex(node) == null ? 0 : GridPane.getColumnIndex(node);
+			if (colIndex >= col && rowIndex >= row && colIndex < col + colSpan && rowIndex < row + rowSpan) {
+				nodesToRemove.add(node);
+			}
+		}
+		grid.getChildren().removeAll(nodesToRemove);
+	}
 }
