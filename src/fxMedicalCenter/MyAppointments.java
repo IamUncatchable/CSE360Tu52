@@ -3,7 +3,10 @@ package fxMedicalCenter;
 import javafx.scene.layout.BorderPane;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -13,40 +16,42 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class MyAppiontments {
+public class MyAppointments {
 
 	private BorderPane root; 
 	private User currentUser;
 	private Patient currentPatient; 
-	private Message currentAppiontments; 
 	private Visit currentVisit; 
-    private TableView table = new TableView();
-
+    private TableView<Appointment> table = new TableView<Appointment>();
+    private ObservableList<Appointment> data;
 	
-	public MyAppiontments(User user, Visit visit) {
+	public MyAppointments(User user, Visit visit) {
 		currentUser = user;
 		currentVisit = visit; 
 		currentPatient = new Patient();
         currentPatient.setPatient(currentUser.getPatientID());
-
-        LocalDate appiontments = currentVisit.getDate();
+        
+        data = FXCollections.observableArrayList();
+        fillData();
 		
         TableColumn<Appointment, String> dateCol = new TableColumn<>("Date");
 //			dateCol.setCellValueFactory(new PropertyValueFactory<Visit, String>("Date"));
 			
-        TableColumn<Appointment, String> timeCol = new TableColumn<>("Time");
-        TableColumn<Appointment, String> providerCol = new TableColumn<>("Provider");
-        TableColumn<Appointment, String> reasonCol = new TableColumn<>("Reason");
+        //TableColumn timeCol = new TableColumn("Time");
+        //TableColumn<Appointment, String> providerCol = new TableColumn<>("Provider");
+        //TableColumn<Appointment, String> reasonCol = new TableColumn<>("Reason");
 
         dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
-        timeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
-        providerCol.setCellValueFactory(new PropertyValueFactory<>("provider"));
-        reasonCol.setCellValueFactory(new PropertyValueFactory<>("reason"));
+        //timeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        //providerCol.setCellValueFactory(new PropertyValueFactory<>("provider"));
+        //reasonCol.setCellValueFactory(new PropertyValueFactory<>("reason"));
 
-        table.getColumns().addAll(dateCol, timeCol, providerCol, reasonCol);
+        //table.getColumns().addAll(dateCol, timeCol, providerCol, reasonCol);
+        table.getColumns().addAll(dateCol);
 
         // Set the columns to resize with the table
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        table.setItems(data);
 
 		VBox top = new VBox();
 		top.getChildren().add(table); 
@@ -63,23 +68,32 @@ public class MyAppiontments {
     public BorderPane getView() {
         return root;
     }
+    
+    public void fillData() {
+    	Database db = new Database();
+    	db.setQuery(Datatables.VISIT.get(), Columns.PATIENT_ID.get(), currentUser.getPatientID());
+    	db.query();
+    	
+    	while(db.next()) {
+    		data.add(new Appointment(new Visit(db.getInt(Columns.VISIT_ID.get()))));
+    	}
+    }
 
     // Define the Appointment class with properties
     public static class Appointment {
-        private final String date;
-        private final String time;
-        private final String provider;
-        private final String reason;
+    	private final SimpleStringProperty date;
+    	private Visit visit;
 
-        public Appointment(String date, String time, String provider, String reason) {
-            this.date = date;
-            this.time = time;
-            this.provider = provider;
-            this.reason = reason;
+        public Appointment(Visit v) {
+            visit = v;
+            date = new SimpleStringProperty(visit.getDate().toString());         // this.time = time;
+           // this.provider = provider;
+           // this.reason = reason;
             
             
         }
-        public void setDate() {
+        public void setDate(String newDate) {
+        	date.set(newDate);
         }
 
         public void setTime() {
@@ -92,9 +106,10 @@ public class MyAppiontments {
         }
 
         public String getDate() {
-            return date;
+            return date.get();
         }
 
+        /*
         public String getTime() {
             return time;
         }
@@ -106,5 +121,6 @@ public class MyAppiontments {
         public String getReason() {
             return reason;
         }
+        */
     }
 }
