@@ -6,57 +6,56 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.util.Optional;
+import java.util.Random;
 
 public class ReceptionistView extends Application {
 
     private TableView<Patient> patientTable = new TableView<>();
+    private Random rand = new Random();
+    // You'll need to store the text fields for data retrieval
+    private TextField nameField;
+    private TextField insuranceProviderField;
+    private TextField dateOfBirthField;
+    private TextField idField;
+    private TextField addressField;
+    private TextField groupNumberField;
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Receptionist Dashboard");
+        primaryStage.setTitle("Welcome to FX Medical Center");
+        // Move the UI setup to a separate method for better readability
+        setupUI(primaryStage);
+        askNewOrExistingPatient(primaryStage);
+    }
 
-        // Menu bar
-        MenuBar menuBar = new MenuBar();
-        Menu fileMenu = new Menu("File");
-        MenuItem exitItem = new MenuItem("Exit");
-        exitItem.setOnAction(actionEvent -> System.exit(0));
-        fileMenu.getItems().add(exitItem);
+    private void setupUI(Stage primaryStage) {
+        // Header with logout button
+        HBox header = new HBox();
+        Label titleLabel = new Label("Welcome to FX Medical Center");
+        Button logoutButton = new Button("Logout");
+        logoutButton.setOnAction(event -> primaryStage.close()); // Simplified logout action
+        header.getChildren().addAll(titleLabel, logoutButton);
+        header.setAlignment(Pos.CENTER);
+        header.setPadding(new Insets(15));
+        header.setSpacing(10);
 
-        Menu manageMenu = new Menu("Manage");
-        MenuItem newVisitItem = new MenuItem("New Visit");
-        MenuItem checkInItem = new MenuItem("Check-In");
-        MenuItem newPatientItem = new MenuItem("New Patient");
-
-        manageMenu.getItems().addAll(newVisitItem, checkInItem, newPatientItem);
-        menuBar.getMenus().addAll(fileMenu, manageMenu);
-
-        // Handling new patient registration
-        newPatientItem.setOnAction(e -> showNewPatientDialog());
-
-        // Table for patient data
-        TableColumn<Patient, String> nameColumn = new TableColumn<>("Name");
-        nameColumn.setCellValueFactory(data -> data.getValue().name);
-        TableColumn<Patient, String> appointmentColumn = new TableColumn<>("Appointment Time");
-        appointmentColumn.setCellValueFactory(data -> data.getValue().appointmentTime);
-
-        patientTable.getColumns().addAll(nameColumn, appointmentColumn);
-        // ... add data to the table
-
-        // Status bar
-        Label statusLabel = new Label("Ready");
-        HBox statusBar = new HBox(statusLabel);
-        statusBar.setAlignment(Pos.CENTER);
-        statusBar.setPadding(new Insets(5, 10, 5, 10));
+        // Patient Form
+        GridPane gridPane = createPatientForm();
 
         // Layout setup
         BorderPane borderPane = new BorderPane();
-        borderPane.setTop(menuBar);
-        borderPane.setCenter(patientTable);
-        borderPane.setBottom(statusBar);
+        borderPane.setTop(header);
+        borderPane.setCenter(gridPane);
 
         // Scene setup
         Scene scene = new Scene(borderPane, 800, 600);
@@ -64,80 +63,103 @@ public class ReceptionistView extends Application {
         primaryStage.show();
     }
 
-    private void showNewPatientDialog() {
-        Dialog<Patient> dialog = new Dialog<>();
-        dialog.setTitle("New Patient");
-        dialog.setHeaderText("Add a New Patient");
+    private GridPane createPatientForm() {
+        GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.setPadding(new Insets(25, 25, 25, 25));
 
-        // Set the button types.
-        ButtonType createButtonType = new ButtonType("Create", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(createButtonType, ButtonType.CANCEL);
+        // Initialize each TextField and add form fields
+        nameField = new TextField();
+        addFormField(gridPane, "Name", 0, nameField);
 
-        // Create the name and appointment fields.
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        insuranceProviderField = new TextField();
+        addFormField(gridPane, "Insurance Provider", 1, insuranceProviderField);
 
-        TextField nameField = new TextField();
-        nameField.setPromptText("Name");
-        TextField appointmentField = new TextField();
-        appointmentField.setPromptText("Appointment Time");
+        dateOfBirthField = new TextField();
+        addFormField(gridPane, "Date of Birth", 2, dateOfBirthField);
 
-        grid.add(new Label("Name:"), 0, 0);
-        grid.add(nameField, 1, 0);
-        grid.add(new Label("Appointment Time:"), 0, 1);
-        grid.add(appointmentField, 1, 1);
+        idField = new TextField();
+        addFormField(gridPane, "ID #", 3, idField);
 
-        dialog.getDialogPane().setContent(grid);
+        addressField = new TextField();
+        addFormField(gridPane, "Address", 4, addressField);
 
-        // Convert the result to a Patient when the create button is clicked.
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == createButtonType) {
-                return new Patient(nameField.getText(), appointmentField.getText());
-            }
-            return null;
-        });
+        groupNumberField = new TextField();
+        addFormField(gridPane, "Group Number", 5, groupNumberField);
 
-        Optional<Patient> result = dialog.showAndWait();
+        Button submitButton = new Button("Submit");
+        submitButton.setOnAction(e -> saveNewPatient());
+        submitButton.setMaxWidth(Double.MAX_VALUE);
+        GridPane.setFillWidth(submitButton, true);
+        gridPane.add(submitButton, 0, 6, 2, 1);
 
-        result.ifPresent(patient -> {
-            patientTable.getItems().add(patient);
-        });
+        return gridPane;
+    }
+
+    private void askNewOrExistingPatient(Stage primaryStage) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Patient Type");
+        alert.setHeaderText("Is this a new or existing patient?");
+        ButtonType newPatientButton = new ButtonType("New Patient");
+        ButtonType existingPatientButton = new ButtonType("Existing Patient");
+        alert.getButtonTypes().setAll(newPatientButton, existingPatientButton, ButtonType.CANCEL);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == newPatientButton) {
+            // Display the form for new patient data entry
+        } else if (result.isPresent() && result.get() == existingPatientButton) {
+            // Handle existing patient scenario
+        }
+    }
+
+    private void addFormField(GridPane gridPane, String labelText, int rowIndex, TextField textField) {
+        Label label = new Label(labelText + ":");
+        textField.setPromptText(labelText);
+        gridPane.add(label, 0, rowIndex);
+        gridPane.add(textField, 1, rowIndex);
+    }
+
+    private void saveNewPatient() {
+        String patientId = generatePatientId();
+        // Here you'd collect data from the form fields and save the new patient
+        // For now, let's just print the collected data
+        System.out.println("Saving new patient with ID: " + patientId);
+        System.out.println("Name: " + nameField.getText());
+        System.out.println("Insurance Provider: " + insuranceProviderField.getText());
+        // Add logic here to save the patient information to your data storage
+    }
+
+    private String generatePatientId() {
+        return "PID-" + rand.nextInt(1_000_000);
     }
 
     // Dummy Patient class for table view
     public static class Patient {
         private final SimpleStringProperty name;
-        private final SimpleStringProperty appointmentTime;
+        private final SimpleStringProperty insuranceProvider;
+        private final SimpleStringProperty dateOfBirth;
+        private final SimpleStringProperty id;
+        private final SimpleStringProperty address;
+        private final SimpleStringProperty groupNumber;
 
-        private Patient(String name, String appointmentTime) {
+        // Constructor initializes all properties
+        private Patient(String name, String insuranceProvider, String dateOfBirth, String id, String address, String groupNumber) {
             this.name = new SimpleStringProperty(name);
-            this.appointmentTime = new SimpleStringProperty(appointmentTime);
+            this.insuranceProvider = new SimpleStringProperty(insuranceProvider);
+            this.dateOfBirth = new SimpleStringProperty(dateOfBirth);
+            this.id = new SimpleStringProperty(id);
+            this.address = new SimpleStringProperty(address);
+            this.groupNumber = new SimpleStringProperty(groupNumber);
         }
 
-        public SimpleStringProperty nameProperty() {
-            return name;
-        }
-
-        public SimpleStringProperty appointmentTimeProperty() {
-            return appointmentTime;
-        }
-
-        public String getName() {
-            return name.get();
-        }
-
-        public void setName(String fName) {
-            name.set(fName);
-        }
-
-        public String getAppointmentTime() {
-            return appointmentTime.get();
-        }
-
-        public void setAppointmentTime(String fName) {
-            appointmentTime.set(fName);
-        }
+        // Getters for each property (add setters if necessary)
+        public String getName() { return name.get(); }
+        public String getInsuranceProvider() { return insuranceProvider.get(); }
+        public String getDateOfBirth() { return dateOfBirth.get(); }
+        public String getId() { return id.get(); }
+        public String getAddress() { return address.get(); }
+        public String getGroupNumber() { return groupNumber.get(); }
     }
 }
