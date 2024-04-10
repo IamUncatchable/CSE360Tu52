@@ -1,5 +1,9 @@
 package fxMedicalCenter;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.stage.Stage;
+
 //controls actions of static dashboard items as well as the Dashboard home page
 
 
@@ -14,13 +18,14 @@ public class DashBoardBaseController {
 		this.dashboardBase = dashboardBase;
 
 		setupActionHandlers();
+//		setupSignOutHandler(); 
 	}
 
-	
 
 	public void showView(String viewName) {
 	}
 
+	
 	
 
 	private void setupActionHandlers() {
@@ -47,11 +52,18 @@ public class DashBoardBaseController {
 		dashboardBase.getHomeButton().setOnAction(e -> {
 			switchScene(DashboardEnums.DASHBOARD.get());
 		});
+		
 
 		dashboardBase.getSignOutButton().setOnAction(e -> {
+			
+			new LoginScreen(dashboardBase.getPrimaryStage());
+			
 			// switchScene(DashboardEnumsRefactored.DASHBOARD.get());
 			// FIXME how to exit to the sign in screen?
 		});
+		
+		
+		
 		///more buttons and actions go here
 		//
 /*
@@ -75,6 +87,16 @@ public class DashBoardBaseController {
 		});
 */
 	}
+	
+//    private void setupSignOutHandler() {
+//        dashboardBase.setSignOutAction(e -> handleSignOut());
+//    }
+
+//    private void handleSignOut() {
+//    	currentStage.close();
+//        new LoginScreen(new Stage()).loginScreenDisplay();
+//    }
+
 
 	// Method to switch scenes or update the dashboard view based on user
 	// interactions

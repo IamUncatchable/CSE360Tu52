@@ -1,5 +1,7 @@
 package fxMedicalCenter;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
+import javafx.stage.Stage;
 
 public class DashboardBase {
 	private BorderPane screen;
@@ -32,9 +35,15 @@ public class DashboardBase {
 	private ImageView sideArtView;
 	private Button dashboardButton, myAccountButton, messagesButton, medicalRecordsButton, appointmentsButton,
 			homeButton, signOutButton;
+	
+	private Stage currentStage; 
+
 
 	// constructor
-	public DashboardBase() {
+	public DashboardBase(Stage stage) {
+		
+		currentStage = stage; 
+		
 		screen = new BorderPane();
 		DashboardView dashboardViews = new DashboardView();
 
@@ -45,6 +54,18 @@ public class DashboardBase {
 		initializeRightArt();
 		initializeScreen();
 	}
+	
+	public Stage getPrimaryStage() {
+		return currentStage;
+	}
+	
+    public void setCurrentStage(Stage currentStage) {
+        this.currentStage = currentStage;
+    }
+	
+    public void setSignOutAction(EventHandler<ActionEvent> eventHandler) {
+        signOutButton.setOnAction(eventHandler);
+    }
 
 	private void initializeScreen() {
 		// use gridpane grid to arrange elements
@@ -80,6 +101,11 @@ public class DashboardBase {
 		messagesButton = createButton(DashboardEnums.MESSAGES.get());
 		medicalRecordsButton = createButton(DashboardEnums.MEDICAL_RECORDS.get());
 		appointmentsButton = createButton(DashboardEnums.APPOINTMENTS.get());
+		
+	}
+	
+	private void handleSignOut() {
+		new LoginScreen(currentStage); 
 	}
 
 	// buttons and actions for left side bar
@@ -156,6 +182,7 @@ public class DashboardBase {
 		signOutButton = new Button("Sign Out");
 		signOutButton.getStyleClass().add(LIGHT_GREEN_TABS);
 		signOutButton.setPrefWidth(215);
+		signOutButton.setOnAction(e -> handleSignOut());
 		homeButton = new Button("Home");
 		homeButton.getStyleClass().add(LIGHT_GREEN_TABS);
 		homeButton.setPrefWidth(215);
