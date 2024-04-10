@@ -148,6 +148,8 @@ public class LoginScreen {
 		        currentStage.show();
 				break;
 			case "receptionist":
+				ReceptionistView view = new ReceptionistView();
+				view.start(currentStage);
 				break;
 			default:
 				break;
