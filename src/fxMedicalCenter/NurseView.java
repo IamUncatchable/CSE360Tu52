@@ -21,8 +21,9 @@ public class NurseView {
 	private Stage currentStage;
 	private int sceneX = 1200;
 	private int sceneY = 800;
-	public NurseView(Stage currentStage) {
+	public NurseView(Stage currentStage,User user) {
 		this.currentStage = currentStage;
+		currentUser = user;
 		root = new BorderPane();
 		Label waitingPatientsLabel = new Label("Waiting Patients");
 		waitingPatientsLabel.getStyleClass().add("title");
