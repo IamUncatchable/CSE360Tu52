@@ -1,8 +1,12 @@
 package fxMedicalCenter;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
+
 
 //controls actions of static dashboard items as well as the Dashboard home page
 
@@ -12,11 +16,12 @@ public class DashBoardBaseController {
 
 	private DashboardBase dashboardBase;
 	private DashboardView dashboardView;
-
+	Map<String, PaneProvider> providers = new HashMap<>();
 	// Constructor
-	public DashBoardBaseController(DashboardBase dashboardBase) {
+	public DashBoardBaseController(DashboardBase dashboardBase, Map<String, PaneProvider> providers) {
 		this.dashboardBase = dashboardBase;
-
+		this.providers.putAll(providers);
+		this.dashboardView = new DashboardView();
 		setupActionHandlers();
 	}
 
@@ -54,7 +59,12 @@ public class DashBoardBaseController {
 
 		dashboardBase.getSignOutButton().setOnAction(e -> {
 			
+<<<<<<< Updated upstream
 			new LoginScreen(dashboardBase.getPrimaryStage());
+=======
+			//new LoginScreen(dashboardBase.getPrimaryStage());
+			
+>>>>>>> Stashed changes
 			// switchScene(DashboardEnumsRefactored.DASHBOARD.get());
 			// FIXME how to exit to the sign in screen?
 		});
@@ -103,6 +113,8 @@ public class DashBoardBaseController {
 		case "Dashboard":
 			dashboardBase.setRightArt(RightBarImage.RIGHT_BAR_1.get());
 			dashboardBase.setBannerText(DashboardEnums.DASHBOARD.get());
+			dashboardBase.setCenter(dashboardView.getCenterView());
+
 			break;
 		case "My Account":
 			dashboardBase.setRightArt(RightBarImage.RIGHT_BAR_2.get());
@@ -113,6 +125,7 @@ public class DashBoardBaseController {
 		case "Messages":
 			dashboardBase.setRightArt(RightBarImage.RIGHT_BAR_3.get());
 			dashboardBase.setBannerText(DashboardEnums.MESSAGES.get());
+			dashboardBase.setCenter(providers.get(DashboardEnums.MESSAGES.get()).getPane());
 			break;
 		case "Medical Records":
 			dashboardBase.setRightArt(RightBarImage.RIGHT_BAR_4.get());

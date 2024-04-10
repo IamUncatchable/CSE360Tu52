@@ -50,7 +50,7 @@ public class NurseView {
 		signout.getStyleClass().add("Button");
 		signout.setOnAction (new EventHandler<>() {
             public void handle(ActionEvent event) {
-            	new LoginScreen(currentStage);
+            	//new LoginScreen(currentStage);
             }
 		});
 		top.getChildren().add(0,signout);
