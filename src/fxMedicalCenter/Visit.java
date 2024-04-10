@@ -16,10 +16,12 @@ public class Visit {
 	private int visitID; 
 	private boolean checkedIn;
 	private boolean finished;
+	private Database db;
 	
 	//here is the constructor 
     public Visit(String patientID,LocalDate date) 
     {
+    	db = new Database();
         this.patientID = patientID;
         this.height = 0; 
         this.weight = 0; 
@@ -29,17 +31,18 @@ public class Visit {
         this.drNotes = ""; 
         this.date = date; 
         this.visitID = 0;
-        setCheckedIn(false);
-        setFinished(false);
+        checkedIn=false;
+        finished=false;
     }
     
     public boolean saveNewVisit() {
-    	Database db = new Database();
+    	
     	return db.createVisit(patientID, visitID, date.toString());
     }
     
 	public Visit(int visitID)
 	{
+		db = new Database();
 		this.visitID= visitID;
 		queryVisit();
 	}
@@ -47,31 +50,38 @@ public class Visit {
 	public void setWeight(int w)
 	{
 		weight = w; 
+		db.updateInt(Datatables.VISIT.get(), Columns.VISIT_ID.get(), visitID, Columns.WEIGHT.get(), weight);
 	}
 	
 	public void setHeight(int h)
 	{
 		height = h; 
+		db.updateInt(Datatables.VISIT.get(), Columns.VISIT_ID.get(), visitID, Columns.HEIGHT.get(), height);
 	}
 	
 	public void setTemp(int t)
 	{
 		temp = t; 
+		db.updateInt(Datatables.VISIT.get(), Columns.VISIT_ID.get(), visitID, Columns.TEMP.get(), temp);
 	}
 	
 	public void setPressure(int pressure)
 	{
 		bloodPressure = pressure; 
+		db.updateInt(Datatables.VISIT.get(), Columns.VISIT_ID.get(), visitID, Columns.BLOOD_PRESSURE.get(), bloodPressure);
+		
 	}
 	
 	public void setNurseNotes(String notes)
 	{
 		nurseNotes = notes; 
+		db.updateString(Datatables.VISIT.get(), Columns.VISIT_ID.get(), visitID, Columns.NURSE_NOTES.get(), nurseNotes);
 	}
 	
 	public void setDRNotes(String notes)
 	{
-		drNotes = notes; 
+		drNotes = notes;
+		db.updateString(Datatables.VISIT.get(), Columns.VISIT_ID.get(), visitID, Columns.DR_NOTES.get(), drNotes);
 	}
 	
     public int getHeight() {
@@ -127,7 +137,7 @@ public class Visit {
              this.bloodPressure = database.getInt(Columns.BLOOD_PRESSURE.get());
              this.nurseNotes = database.getString(Columns.NURSE_NOTES.get());
              this.drNotes = database.getString(Columns.DR_NOTES.get());
-             this.date.parse(database.getString(Columns.DATE.get()));
+             this.date=LocalDate.parse(database.getString(Columns.DATE.get()));
              this.visitID = database.getInt(Columns.VISIT_ID.get());
          } else {
              System.out.println("Visit with ID " + visitID + " not found.");

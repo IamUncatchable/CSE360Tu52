@@ -10,6 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 
 public class MetricsEntry {
@@ -95,22 +96,26 @@ public class MetricsEntry {
 		center.add(tempBox,0,1);
 		center.add(bloodBox, 1, 1);
 		
-		HBox bottom = new HBox();
-		bottom.setAlignment(Pos.CENTER);
+		//HBox bottom = new HBox();
+		//bottom.setAlignment(Pos.CENTER);
 		Button save = new Button();
-		save.setTranslateY(-150);
 		save.setText("Save Metrics");
+		save.setAlignment(Pos.CENTER);
 		save.getStyleClass().add("Button");
+		save.setTranslateX(325);
+		save.setTranslateY(50);
 		save.setOnAction (new EventHandler<>() {
             public void handle(ActionEvent event) {
             	saveMetrics();
             }
 		});
-		bottom.getChildren().add(0,save);
+		/*bottom.getChildren().add(0,save);
 		
 		
 		
 		root.setBottom(bottom);
+		*/
+		center.add(save, 0, 2,2,1);
 		root.setCenter(center);
 		Scene scene = new Scene(root,currentStage.getWidth(),currentStage.getHeight());
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -121,10 +126,13 @@ public class MetricsEntry {
 	
 	private void saveMetrics() {
 		try {
-    		int patientWeight = Integer.parseInt(weight.getText());
-    		
+    		visit.setWeight(Integer.parseInt(weight.getText()));
+    		visit.setHeight(Integer.parseInt(height.getText()));
+    		visit.setPressure(Integer.parseInt(blood.getText()));
+    		visit.setTemp(Integer.parseInt(temp.getText()));
+    		new nurseNotesEntry(visit,currentUser,currentStage);
     	} catch (NumberFormatException e) {
-    		new Error("Invalid characters");
+    		new Error("Invalid characters detected in field or a field is empty.");
     	}
 	}
 	

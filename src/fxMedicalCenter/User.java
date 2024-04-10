@@ -10,6 +10,7 @@ public class User {
         private String password;
         private String accountType;
         private String patientID;
+        private Database db;
     
         // Constructor
         public User(String fName, String lName, String user, String pass, String accountType, String patientID) {
@@ -19,6 +20,13 @@ public class User {
             this.password = pass;
             this.accountType = accountType;
             this.patientID = patientID;
+            db = new Database();
+        }
+        
+        public User(String username) {
+        	db = new Database();
+        	this.username = username;
+        	load();
         }
     
         // Getters and Setters
@@ -84,14 +92,27 @@ public class User {
         	
         }
     
-        public static User load(String username) {
+        private boolean load() {
+        	boolean successful = false;
+        	db.setQuery(Datatables.USERS.get(), Columns.USERNAME.get(), username);
+        	db.query();
+        	if(db.next()) {
+        		firstName = db.getString(Columns.FIRST_NAME.get());
+        		lastName = db.getString(Columns.LAST_NAME.get());
+        		password = db.getString(Columns.PASSWORD.get());
+        		accountType = db.getString(Columns.ACCOUNT_TYPE.get());
+        		patientID = db.getString(Columns.PATIENT_ID.get());
+        	}
             // Implementation to load user details from a database
-            return null; // Placeholder
+            return successful; // Placeholder
         }
         
         public void createUser() {
-        	Database db = new Database();
         	db.createUser(username, password, firstName, lastName, accountType, patientID);
+        }
+        
+        public String getType() {
+        	return accountType;
         }
         // More methods as needed...
 }

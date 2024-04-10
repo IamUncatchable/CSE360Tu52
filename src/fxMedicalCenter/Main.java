@@ -11,11 +11,11 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		
-
+		new LoginScreen(primaryStage);
 		
 		//Database project = new Database();
 		
-		new NurseView(primaryStage);
+		//new NurseView(primaryStage);
 		//DashboardBase dashboardView = new DashboardBase();
         //DashBoardBaseController dashboardController = new DashBoardBaseController(dashboardView);
 		//Visit newVisit = new Visit("0101_JohnDoe",LocalDate.now());
