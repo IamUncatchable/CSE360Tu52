@@ -22,6 +22,7 @@ public class nurseNotesEntry {
 	private Stage currentStage;
 	private Patient currentPatient;
 	private BorderPane root;
+	private TextField history,nurseNotes;
 	
 	public nurseNotesEntry(Visit visit,User user,Stage stage) {
 		currentVisit = visit;
@@ -146,12 +147,33 @@ public class nurseNotesEntry {
 		
 		Label historyLabel = new Label("History");
 		historyLabel.getStyleClass().add("defaultText");
-		//TextField history
+		history = new TextField(currentPatient.getHistory());
+		history.getStyleClass().add("TextBox2");
+		history.setMaxHeight(200);
+		history.setMinHeight(200);
+		history.setAlignment(Pos.TOP_LEFT);
 		VBox historyBox= new VBox();
+		historyBox.getChildren().add(0,historyLabel);
+		historyBox.getChildren().add(1,history);
 		
+		Label nurseNotesLabel = new Label("Nurse's Notes");
+		nurseNotesLabel.getStyleClass().add("defaultText");
+		nurseNotes = new TextField();
+		nurseNotes.getStyleClass().add("TextBox2");
+		nurseNotes.setMaxHeight(200);
+		nurseNotes.setMinHeight(200);
+		nurseNotes.setAlignment(Pos.TOP_LEFT);
+		VBox nurseNotesBox= new VBox();
+		nurseNotesBox.getChildren().add(0,nurseNotesLabel);
+		nurseNotesBox.getChildren().add(1,nurseNotes);
 		
 		VBox center = new VBox();
+		center.setTranslateX(-50);
+		center.setMaxWidth(600);
+		center.getChildren().add(0,historyBox);
+		center.getChildren().add(1,nurseNotesBox);
 		
+		root.setCenter(center);
 		root.setRight(right);
 		root.setTop(top);
 		Scene scene = new Scene(root,currentStage.getWidth(),currentStage.getHeight());
