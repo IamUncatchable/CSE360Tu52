@@ -131,6 +131,8 @@ public class DashBoardBaseController {
 		case "Appointments":
 			dashboardBase.setRightArt(RightBarImage.RIGHT_BAR_5.get());
 			dashboardBase.setBannerText(DashboardEnums.APPOINTMENTS.get());
+			MyAppiontments appiontments = new MyAppiontments(dashboardBase.getUser()); 
+			dashboardBase.setCenter(appiontments.getView());
 			break;
 
 		default:

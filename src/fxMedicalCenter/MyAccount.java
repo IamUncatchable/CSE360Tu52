@@ -18,7 +18,7 @@ public class MyAccount {
 		
 		currentPatient.setPatient(currentUser.getPatientID());
 		
-		VBox top = new VBox(10);
+		VBox top = new VBox(20);
 		Label patientName = new Label("Name: " + currentPatient.getFirstName() + " " + currentPatient.getLastName());
 		Label patientBirthday = new Label("Birthday: " + currentPatient.getBirthday());
 		Label patientGender = new Label("Gender: " + currentPatient.getGender());
