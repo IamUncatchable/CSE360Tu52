@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import java.time.LocalDate;
 
 public class nurseNotesEntry {
 
@@ -36,9 +37,12 @@ public class nurseNotesEntry {
 		
 		HBox top = new HBox();
 		HBox patientNameAndInfo = new HBox();
+		top.setAlignment(Pos.CENTER_LEFT);
 		patientNameAndInfo.getStyleClass().add("scroll");
-		patientNameAndInfo.setMaxHeight(150);
-		patientNameAndInfo.setMaxWidth(300);
+		patientNameAndInfo.setMaxHeight(100);
+		patientNameAndInfo.setMinWidth(400);
+		patientNameAndInfo.setAlignment(Pos.CENTER);
+		
 		String patientInfo = currentPatient.getFirstName() + " " + currentPatient.getLastName() +", " + currentPatient.getBirthday() + ", " + currentPatient.getGender();
 		Label pInfoLabel = new Label(patientInfo);
 		pInfoLabel.getStyleClass().add("title");
@@ -50,11 +54,100 @@ public class nurseNotesEntry {
 		patientNameAndInfo.getChildren().add(0,pInfoLabel);
 		
 		
+		HBox dateLogout = new HBox();
+		dateLogout.setAlignment(Pos.CENTER_RIGHT);
+		dateLogout.setSpacing(20);
+		dateLogout.setTranslateX(200);
+		Label date = new Label(LocalDate.now().toString());
+		date.getStyleClass().add("defaultText");
+		Button signout = new Button();
+		signout.setText("Sign out");
+		signout.getStyleClass().add("Button");
+		signout.setOnAction (new EventHandler<>() {
+            public void handle(ActionEvent event) {
+            	new LoginScreen(currentStage);
+            }
+		});
+		
+		dateLogout.getChildren().add(0,date);
+		dateLogout.getChildren().add(1,signout);
+		top.getChildren().add(2,dateLogout);
+		
+		//////////////////////////////////////////////////////////////////////////
+		//Right side of BorderPane
+		//////////////////////////////////////////////////////////////////////////
+		
+		
+		Label weightLabel = new Label("Weight");
+		weightLabel.getStyleClass().add("defaultTextBold");
+		Label weight = new Label(""+currentVisit.getWeight());
+		weight.getStyleClass().add("defaultText");
+		VBox weightBox =new VBox();
+		weightBox.setSpacing(-20);
+		weightBox.getChildren().add(0,weightLabel);
+		weightBox.getChildren().add(1,weight);
+		
+		Label heightLabel = new Label("Height");
+		heightLabel.getStyleClass().add("defaultTextBold");
+		Label height = new Label(""+currentVisit.getHeight());
+		height.getStyleClass().add("defaultText");
+		VBox heightBox =new VBox();
+		heightBox.setSpacing(-20);
+		heightBox.getChildren().add(0,heightLabel);
+		heightBox.getChildren().add(1,height);
+		
+		Label tempLabel = new Label("Temperature");
+		tempLabel.getStyleClass().add("defaultTextBold");
+		Label temp = new Label(""+currentVisit.getTemp());
+		temp.getStyleClass().add("defaultText");
+		VBox tempBox =new VBox();
+		tempBox.setSpacing(-20);
+		tempBox.getChildren().add(0,tempLabel);
+		tempBox.getChildren().add(1,temp);
+		
+		Label bloodLabel = new Label("Blood Pressure");
+		bloodLabel.getStyleClass().add("defaultTextBold");
+		Label blood = new Label(""+currentVisit.getPressure());
+		blood.getStyleClass().add("defaultText");
+		VBox bloodBox =new VBox();
+		bloodBox.setSpacing(-20);
+		bloodBox.getChildren().add(0,bloodLabel);
+		bloodBox.getChildren().add(1,blood);
+		
+		GridPane metrics = new GridPane();
+		metrics.add(weightBox, 0, 0);
+		metrics.add(heightBox, 1, 0);
+		metrics.add(tempBox, 0, 1);
+		metrics.add(bloodBox, 1, 1);
+		metrics.setHgap(20);
+		metrics.setVgap(5);
+		
+		Button ready = new Button();
+		ready.setText("Ready for Doctor");
+		ready.getStyleClass().add("Button");
+		ready.setOnAction (new EventHandler<>() {
+            public void handle(ActionEvent event) {
+            	doReadyForDR();
+            }
+		});
+		
+		VBox right = new VBox();
+		right.setAlignment(Pos.TOP_CENTER);
+		right.getChildren().add(0,metrics);
+		right.getChildren().add(1,ready);
+		right.setTranslateX(-100);
+		
+		
+		root.setRight(right);
 		root.setTop(top);
 		Scene scene = new Scene(root,currentStage.getWidth(),currentStage.getHeight());
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		currentStage.setScene(scene);
 		currentStage.show();
 
+	}
+	
+	private void doReadyForDR() {
+		
 	}
 }
