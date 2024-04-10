@@ -25,6 +25,7 @@ public class NurseView {
 		this.currentStage = currentStage;
 		currentUser = user;
 		root = new BorderPane();
+		root.getStyleClass().add("dashboard-background-off-white");
 		Label waitingPatientsLabel = new Label("Waiting Patients");
 		waitingPatientsLabel.getStyleClass().add("title");
 		

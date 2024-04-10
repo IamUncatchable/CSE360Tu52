@@ -61,10 +61,11 @@
 }
 
 .Button{
-	-fx-background-radius: 0;
 	-fx-background-color: #aedd94;
 	-fx-font: 24 Times;
 	-fx-border-color: black;
+	-fx-background-radius: 10 10 10 10;
+	-fx-border-radius: 10 10 10 10;
 }
 
 .Button:pressed{

@@ -125,6 +125,7 @@ public class nurseNotesEntry {
 		Button ready = new Button();
 		ready.setText("Ready for Doctor");
 		ready.getStyleClass().add("Button");
+		ready.setAlignment(Pos.BOTTOM_CENTER);
 		ready.setOnAction (new EventHandler<>() {
             public void handle(ActionEvent event) {
             	doReadyForDR();
@@ -136,7 +137,20 @@ public class nurseNotesEntry {
 		right.getChildren().add(0,metrics);
 		right.getChildren().add(1,ready);
 		right.setTranslateX(-100);
+		right.setSpacing(200);
 		
+		
+		////////////////////////////////////////
+		//Center pane
+		////////////////////////////////////////
+		
+		Label historyLabel = new Label("History");
+		historyLabel.getStyleClass().add("defaultText");
+		//TextField history
+		VBox historyBox= new VBox();
+		
+		
+		VBox center = new VBox();
 		
 		root.setRight(right);
 		root.setTop(top);

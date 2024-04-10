@@ -40,27 +40,16 @@ public class DashboardBase {
 	private ImageView sideArtView;
 	private Button dashboardButton, myAccountButton, messagesButton, medicalRecordsButton, appointmentsButton,
 			homeButton, signOutButton;
-<<<<<<< Updated upstream
+
 	
 	private Stage currentStage; 
 	private User currentUser; 
-=======
->>>>>>> Stashed changes
 
-	private Stage currentStage;
 
 	// constructor
-<<<<<<< Updated upstream
-	public DashboardBase(Stage stage, User user) {
-		
+	public DashboardBase(Stage stage,User user) {
 		currentStage = stage;
-		currentUser = user; 
-=======
-	//public DashboardBase(Stage stage) {
-	
-		//currentStage = stage;
-	public DashboardBase() {
->>>>>>> Stashed changes
+		currentUser = user;
 		
 		screen = new BorderPane();
 		DashboardView dashboardViews = new DashboardView();
@@ -76,29 +65,14 @@ public class DashboardBase {
 	public Stage getPrimaryStage() {
 		return currentStage;
 	}
-<<<<<<< Updated upstream
 	
 	public User getUser() {
 		return currentUser; 
 	}
 	
-    public void setCurrentStage(Stage currentStage) {
-        this.currentStage = currentStage;
-    }
-	
-    public void setSignOutAction(EventHandler<ActionEvent> eventHandler) {
-        signOutButton.setOnAction(eventHandler);
-    }
-=======
-
-	public void setCurrentStage(Stage currentStage) {
-		this.currentStage = currentStage;
-	}
-
 	public void setSignOutAction(EventHandler<ActionEvent> eventHandler) {
 		signOutButton.setOnAction(eventHandler);
 	}
->>>>>>> Stashed changes
 
 	private void initializeScreen() {
 		// use gridpane grid to arrange elements

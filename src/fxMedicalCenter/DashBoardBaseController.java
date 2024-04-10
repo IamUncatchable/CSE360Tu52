@@ -59,12 +59,9 @@ public class DashBoardBaseController {
 
 		dashboardBase.getSignOutButton().setOnAction(e -> {
 			
-<<<<<<< Updated upstream
+
 			new LoginScreen(dashboardBase.getPrimaryStage());
-=======
-			//new LoginScreen(dashboardBase.getPrimaryStage());
-			
->>>>>>> Stashed changes
+
 			// switchScene(DashboardEnumsRefactored.DASHBOARD.get());
 			// FIXME how to exit to the sign in screen?
 		});
