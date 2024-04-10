@@ -189,4 +189,10 @@ public class Patient {
         return history;
     }
     
+    /*public boolean generateID() {
+    	if(!birthday.equals(null) && !firstName.equals(null) && !lastName.equals(null)) {
+    		
+    	}
+    }*/
+    
 }

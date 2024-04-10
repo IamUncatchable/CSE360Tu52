@@ -44,12 +44,14 @@ public class DashboardBase {
 	
 	private Stage currentStage; 
 	private User currentUser; 
+	private Visit currentVisit; 
 
 
 	// constructor
-	public DashboardBase(Stage stage,User user) {
+	public DashboardBase(Stage stage,User user, Visit visit) {
 		currentStage = stage;
 		currentUser = user;
+		currentVisit = visit; 
 		
 		screen = new BorderPane();
 		DashboardView dashboardViews = new DashboardView();
@@ -68,6 +70,10 @@ public class DashboardBase {
 	
 	public User getUser() {
 		return currentUser; 
+	}
+	
+	public Visit getVisit() {
+		return currentVisit; 
 	}
 	
 	public void setSignOutAction(EventHandler<ActionEvent> eventHandler) {

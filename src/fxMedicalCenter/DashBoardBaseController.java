@@ -16,11 +16,13 @@ public class DashBoardBaseController {
 
 	private DashboardBase dashboardBase;
 	private DashboardView dashboardView;
-	Map<String, PaneProvider> providers = new HashMap<>();
+//	Map<String, PaneProvider> providers = new HashMap<>();
 	// Constructor
-	public DashBoardBaseController(DashboardBase dashboardBase, Map<String, PaneProvider> providers) {
+	public DashBoardBaseController(DashboardBase dashboardBase) {
+//	public DashBoardBaseController(DashboardBase dashboardBase, Map<String, PaneProvider> providers) {
+
 		this.dashboardBase = dashboardBase;
-		this.providers.putAll(providers);
+//		this.providers.putAll(providers);
 		this.dashboardView = new DashboardView();
 		setupActionHandlers();
 	}
@@ -122,7 +124,7 @@ public class DashBoardBaseController {
 		case "Messages":
 			dashboardBase.setRightArt(RightBarImage.RIGHT_BAR_3.get());
 			dashboardBase.setBannerText(DashboardEnums.MESSAGES.get());
-			dashboardBase.setCenter(providers.get(DashboardEnums.MESSAGES.get()).getPane());
+//			dashboardBase.setCenter(providers.get(DashboardEnums.MESSAGES.get()).getPane());
 			break;
 		case "Medical Records":
 			dashboardBase.setRightArt(RightBarImage.RIGHT_BAR_4.get());
@@ -131,7 +133,7 @@ public class DashBoardBaseController {
 		case "Appointments":
 			dashboardBase.setRightArt(RightBarImage.RIGHT_BAR_5.get());
 			dashboardBase.setBannerText(DashboardEnums.APPOINTMENTS.get());
-			MyAppiontments appiontments = new MyAppiontments(dashboardBase.getUser()); 
+			MyAppointments appiontments = new MyAppointments(dashboardBase.getUser(), dashboardBase.getVisit()); 
 			dashboardBase.setCenter(appiontments.getView());
 			break;
 
