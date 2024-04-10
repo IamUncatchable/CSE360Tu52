@@ -32,18 +32,29 @@ public class MetricsEntry {
 		patient = new Patient();
 		patient.setPatient(visit.getPatientID());
 		BorderPane root = new BorderPane();
-		HBox top = new HBox();
-		top.setAlignment(Pos.CENTER);
-		Label title = new Label(patient.getFirstName()+"'s Metrics today");
-		title.setTranslateY(250);
-		title.getStyleClass().add("title");
-		top.getChildren().add(title);
-		root.setTop(top);
-		
-		GridPane center = new GridPane();
-		center.setHgap(10);
-		center.setVgap(10);
+		VBox center = new VBox();
 		center.setAlignment(Pos.CENTER);
+		Label title = new Label(patient.getFirstName()+"'s Metrics today");
+		title.getStyleClass().add("title");
+		Button signout = new Button();
+		signout.setText("Sign out");
+		signout.getStyleClass().add("Button");
+		signout.setAlignment(Pos.TOP_RIGHT);
+		signout.setOnAction (new EventHandler<>() {
+            public void handle(ActionEvent event) {
+            	new LoginScreen(currentStage);
+            }
+		});
+		center.getChildren().add(0,title);
+		VBox right = new VBox();
+		right.getChildren().add(0,signout);
+		right.setPadding(Insets.EMPTY);
+		root.setRight(right);
+		
+		GridPane grid = new GridPane();
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setAlignment(Pos.CENTER);
 		VBox weightBox = new VBox();
 		weightBox.setAlignment(Pos.CENTER);
 		weightBox.setSpacing(10);
@@ -91,10 +102,10 @@ public class MetricsEntry {
 		bloodBox.getChildren().add(1,blood);
 		
 		
-		center.add(weightBox, 0, 0);
-		center.add(heightBox, 1, 0);
-		center.add(tempBox,0,1);
-		center.add(bloodBox, 1, 1);
+		grid.add(weightBox, 0, 0);
+		grid.add(heightBox, 1, 0);
+		grid.add(tempBox,0,1);
+		grid.add(bloodBox, 1, 1);
 		
 		//HBox bottom = new HBox();
 		//bottom.setAlignment(Pos.CENTER);
@@ -115,7 +126,8 @@ public class MetricsEntry {
 		
 		root.setBottom(bottom);
 		*/
-		center.add(save, 0, 2,2,1);
+		grid.add(save, 0, 2,2,1);
+		center.getChildren().add(1,grid);
 		root.setCenter(center);
 		Scene scene = new Scene(root,currentStage.getWidth(),currentStage.getHeight());
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

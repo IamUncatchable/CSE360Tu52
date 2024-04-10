@@ -43,6 +43,19 @@ public class NurseView {
 		centerBox.setAlignment(Pos.CENTER);
 		
 		
+		HBox top = new HBox();
+		top.setAlignment(Pos.CENTER_RIGHT);
+		Button signout = new Button();
+		signout.setText("Sign out");
+		signout.getStyleClass().add("Button");
+		signout.setOnAction (new EventHandler<>() {
+            public void handle(ActionEvent event) {
+            	new LoginScreen(currentStage);
+            }
+		});
+		top.getChildren().add(0,signout);
+		
+		root.setTop(top);
 		root.setCenter(centerBox);
 		Scene scene = new Scene(root,sceneX,sceneY);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
