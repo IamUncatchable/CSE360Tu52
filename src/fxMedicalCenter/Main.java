@@ -15,10 +15,8 @@ import java.util.Map;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
-		User user = new User();
-		Visit visit = new Visit();
-		DashboardBase dashboardBase = new DashboardBase(primaryStage,user, visit);
-		new LoginScreen(primaryStage,dashboardBase);
+
+		new LoginScreen(primaryStage);
 		
 	}
 	

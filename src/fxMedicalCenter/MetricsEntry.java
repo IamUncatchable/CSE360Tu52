@@ -42,7 +42,7 @@ public class MetricsEntry {
 		signout.setAlignment(Pos.TOP_RIGHT);
 		signout.setOnAction (new EventHandler<>() {
             public void handle(ActionEvent event) {
-            	new LoginScreen(currentStage, dashboardBase);
+            	new LoginScreen(currentStage);
             }
 		});
 		center.getChildren().add(0,title);

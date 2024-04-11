@@ -66,7 +66,7 @@ public class nurseNotesEntry {
 		signout.getStyleClass().add("Button");
 		signout.setOnAction (new EventHandler<>() {
             public void handle(ActionEvent event) {
-            	new LoginScreen(currentStage, dashboardBase);
+            	new LoginScreen(currentStage);
             }
 		});
 		

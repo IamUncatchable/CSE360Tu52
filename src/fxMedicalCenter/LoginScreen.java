@@ -28,7 +28,7 @@ public class LoginScreen {
 	private TextField usernameField;
 	private PasswordField passwordField;
 	
-	public LoginScreen(Stage stage, DashboardBase dashboardBase) {
+	public LoginScreen(Stage stage) {
 		this.dashboardBase = dashboardBase;
 		currentStage = stage;
 		loginScreenDisplay();
@@ -139,6 +139,7 @@ public class LoginScreen {
 	private void loginSuccessful(String username) {
 		currentUser = new User(username);
 		String type = currentUser.getType();
+		Visit visit = new Visit();
 		
 		switch(type){
 			case "doctor":
@@ -149,6 +150,7 @@ public class LoginScreen {
 				new NurseView(currentStage,currentUser);
 				break;
 			case "patient":
+				DashboardBase dashboardBase = new DashboardBase(currentStage,currentUser, visit);
 				Scene scene = new Scene(dashboardBase.getView(), 1366, 780);
 				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 				currentStage.setScene(scene);
