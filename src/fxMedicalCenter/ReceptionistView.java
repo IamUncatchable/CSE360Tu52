@@ -14,24 +14,25 @@ import javafx.stage.Stage;
 import java.util.Optional;
 import java.util.Random;
 
-public class ReceptionistView extends Application {
+public class ReceptionistView {
 
-    private TableView<Patient> patientTable = new TableView<>();
-    private Random rand = new Random();
     // You'll need to store the text fields for data retrieval
-    private TextField nameField;
+    private TextField fNameField;
+    private TextField lNameField;
+    private TextField genderField;
     private TextField insuranceProviderField;
     private TextField dateOfBirthField;
-    private TextField idField;
     private TextField addressField;
+    private TextField cityField;
+    private TextField stateField;
+    private TextField emailField;
     private TextField groupNumberField;
+    private TextField phoneField;
+    private TextField zipField;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 
-    @Override
-    public void start(Stage primaryStage) {
+
+    public ReceptionistView(Stage primaryStage) {
         primaryStage.setTitle("Welcome to FX Medical Center");
         // Move the UI setup to a separate method for better readability
         setupUI(primaryStage);
@@ -71,29 +72,48 @@ public class ReceptionistView extends Application {
         gridPane.setPadding(new Insets(25, 25, 25, 25));
 
         // Initialize each TextField and add form fields
-        nameField = new TextField();
-        addFormField(gridPane, "Name", 0, nameField);
-
-        insuranceProviderField = new TextField();
-        addFormField(gridPane, "Insurance Provider", 1, insuranceProviderField);
-
+        fNameField = new TextField();
+        addFormField(gridPane, "First Name", 0, fNameField);
+        
+        lNameField = new TextField();
+        addFormField(gridPane, "Last Name", 1, lNameField);
+        
         dateOfBirthField = new TextField();
         addFormField(gridPane, "Date of Birth", 2, dateOfBirthField);
+        
+        genderField = new TextField();
+        addFormField(gridPane, "Gender", 3, genderField);
 
-        idField = new TextField();
-        addFormField(gridPane, "ID #", 3, idField);
-
-        addressField = new TextField();
-        addFormField(gridPane, "Address", 4, addressField);
-
+        insuranceProviderField = new TextField();
+        addFormField(gridPane, "Insurance Provider", 4, insuranceProviderField);
+        
         groupNumberField = new TextField();
         addFormField(gridPane, "Group Number", 5, groupNumberField);
+
+        addressField = new TextField();
+        addFormField(gridPane, "Address", 6, addressField);
+        
+        cityField = new TextField();
+        addFormField(gridPane, "City", 7, cityField);
+        
+        stateField = new TextField();
+        addFormField(gridPane, "State", 8, stateField);
+        
+        zipField = new TextField();
+        addFormField(gridPane, "Zip", 9, zipField);
+        
+        emailField = new TextField();
+        addFormField(gridPane, "Email", 10, emailField);
+
+        phoneField = new TextField();
+        addFormField(gridPane, "Phone", 11, phoneField);
+
 
         Button submitButton = new Button("Submit");
         submitButton.setOnAction(e -> saveNewPatient());
         submitButton.setMaxWidth(Double.MAX_VALUE);
         GridPane.setFillWidth(submitButton, true);
-        gridPane.add(submitButton, 0, 6, 2, 1);
+        gridPane.add(submitButton, 0, 12, 2, 1);
 
         return gridPane;
     }
@@ -122,44 +142,13 @@ public class ReceptionistView extends Application {
     }
 
     private void saveNewPatient() {
-        String patientId = generatePatientId();
+    
         // Here you'd collect data from the form fields and save the new patient
         // For now, let's just print the collected data
-        System.out.println("Saving new patient with ID: " + patientId);
-        System.out.println("Name: " + nameField.getText());
-        System.out.println("Insurance Provider: " + insuranceProviderField.getText());
-        // Add logic here to save the patient information to your data storage
+    	// Add logic here to save the patient information to your data storage
+    		Patient patient = new Patient();
+    		patient.newPatient(genderField.getText(),addressField.getText(),cityField.getText(),stateField.getText(),Integer.parseInt(zipField.getText()),Integer.parseInt(phoneField.getText()),emailField.getText(),Integer.parseInt(groupNumberField.getText()),insuranceProviderField.getText(),null,fNameField.getText(),lNameField.getText(),dateOfBirthField.getText());
+        
     }
-
-    private String generatePatientId() {
-        return "PID-" + rand.nextInt(1_000_000);
-    }
-
-    // Dummy Patient class for table view
-    public static class Patient {
-        private final SimpleStringProperty name;
-        private final SimpleStringProperty insuranceProvider;
-        private final SimpleStringProperty dateOfBirth;
-        private final SimpleStringProperty id;
-        private final SimpleStringProperty address;
-        private final SimpleStringProperty groupNumber;
-
-        // Constructor initializes all properties
-        private Patient(String name, String insuranceProvider, String dateOfBirth, String id, String address, String groupNumber) {
-            this.name = new SimpleStringProperty(name);
-            this.insuranceProvider = new SimpleStringProperty(insuranceProvider);
-            this.dateOfBirth = new SimpleStringProperty(dateOfBirth);
-            this.id = new SimpleStringProperty(id);
-            this.address = new SimpleStringProperty(address);
-            this.groupNumber = new SimpleStringProperty(groupNumber);
-        }
-
-        // Getters for each property (add setters if necessary)
-        public String getName() { return name.get(); }
-        public String getInsuranceProvider() { return insuranceProvider.get(); }
-        public String getDateOfBirth() { return dateOfBirth.get(); }
-        public String getId() { return id.get(); }
-        public String getAddress() { return address.get(); }
-        public String getGroupNumber() { return groupNumber.get(); }
-    }
+   
 }

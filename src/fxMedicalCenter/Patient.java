@@ -25,6 +25,20 @@ public class Patient {
     }
     
     public boolean newPatient(String gender,String address,String city,String state,int zip,int phone,String email,int insuranceNumber,String insuranceProvider,String history,String firstName,String lastName,String birthday) {
+    	this.firstName = firstName;
+    	this.lastName = lastName;
+    	this.birthday = birthday;
+    	this.gender = gender;
+    	this.insuranceProvider = insuranceProvider;
+    	this.insuranceNumber = insuranceNumber;
+    	this.address = address;
+    	this.city = city;
+    	this.state = state;
+    	this.zip =  zip;
+    	this.email = email;
+    	this.phone = phone;
+    	
+    	generateID();
     	return db.createPatient(gender, address, city, state, zip, phone, email, insuranceNumber, insuranceProvider, patientID, history,firstName,lastName,birthday);
     }
 	
@@ -197,10 +211,28 @@ public class Patient {
         return history;
     }
     
-    /*public boolean generateID() {
-    	if(!birthday.equals(null) && !firstName.equals(null) && !lastName.equals(null)) {
-    		
+    public void generateID() {
+    	String baseID = birthday + "_"+firstName+"_"+lastName;
+    	db.setQuery(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), baseID);
+    	db.query();
+    	
+    	if(!db.next()) {
+    		patientID = baseID;
+    	} else {
+    		boolean unique = false;
+    		int count = 1;
+    		while (!unique) {
+    			String testID = baseID + "-"+count;
+    			db.setQuery(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), testID);
+    	    	db.query();
+    	    	if(!db.next()) {
+    	    		patientID = testID;
+    	    		unique = true;
+    	    	} else {
+    	    		count++;
+    	    	}
+    		}
     	}
-    }*/
+    }
     
 }

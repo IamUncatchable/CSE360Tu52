@@ -18,7 +18,6 @@ public class Main extends Application {
 		
 		new LoginScreen(primaryStage);
 		
-		
 	}
 	
 	public static void main(String[] args) {
