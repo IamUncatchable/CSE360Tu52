@@ -32,11 +32,7 @@ public class MessagesController implements PaneProvider {
 
 	}
 	
-	public void onButtonClick() {
-        // Logic to execute when the button is clicked
-		setCenter(messagesView.getCenterContent());
-        System.out.println("Button was clicked!");
-    }
+	
 	/*
 	//this is broken and dumb does nothing.
     private void setupEmailListView() {
@@ -89,6 +85,7 @@ public class MessagesController implements PaneProvider {
 	}
 */
 	public void setCenter(Pane centerContent) {
+		
     }
 
 	

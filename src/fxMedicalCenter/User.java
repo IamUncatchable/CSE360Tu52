@@ -11,7 +11,8 @@ public class User {
         private String accountType;
         private String patientID;
         private Database db;
-    
+        //default Constructor
+        public User() {}
         // Constructor
         public User(String fName, String lName, String user, String pass, String accountType, String patientID) {
             this.firstName = fName;

@@ -18,7 +18,11 @@ public class Visit {
 	private boolean finished;
 	private Database db;
 	
-	//here is the constructor 
+	//here is the default constructor 
+	public Visit() {
+		
+	}
+	//here is a meaningful constructor
     public Visit(String patientID,LocalDate date) 
     {
     	db = new Database();
