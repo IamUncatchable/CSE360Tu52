@@ -145,6 +145,32 @@ public class Database {
 			return successful;
 		}
 		
+		public boolean updateBoolean(String dataTable,String uniqueColumn,String uniqueValue,String columnToUpdate,Boolean newValue) {
+			boolean successful = false;
+			
+			try {
+				s.execute("Update " + dataTable + " set " + columnToUpdate + " = " + newValue + " where " + uniqueColumn + " = \'"+ uniqueValue +"\';");
+				successful = true;
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return successful;
+		}
+		
+		public boolean updateBoolean(String dataTable,String uniqueColumn,int uniqueValue,String columnToUpdate,Boolean newValue) {
+			boolean successful = false;
+			
+			try {
+				s.execute("Update " + dataTable + " set " + columnToUpdate + " = " + newValue + " where " + uniqueColumn + " = "+ uniqueValue +";");
+				successful = true;
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return successful;
+		}
+		
 		public boolean createPatient(String gender,String address,String city,String state,int zip,int phone,String email,int insuranceNumber,String insuranceProvider,String patientID,String history,String firstName, String lastName,String birthday) {
 			boolean successful = false;
 			try {

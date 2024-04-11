@@ -151,6 +151,7 @@ public class Visit {
 
 	public void setCheckedIn(boolean checkedIn) {
 		this.checkedIn = checkedIn;
+		db.updateBoolean(Datatables.VISIT.get(), Columns.VISIT_ID.get(), visitID, Columns.CHECKED_IN.get(), checkedIn);
 	}
 
 	public boolean isFinished() {
@@ -159,6 +160,7 @@ public class Visit {
 
 	public void setFinished(boolean finished) {
 		this.finished = finished;
+		db.updateBoolean(Datatables.VISIT.get(), Columns.VISIT_ID.get(), visitID, Columns.FINISHED.get(), finished);
 	}    
 	
 }

@@ -184,6 +184,8 @@ public class nurseNotesEntry {
 	}
 	
 	private void doReadyForDR() {
-		
+		currentVisit.setNurseNotes(nurseNotes.getText());
+		currentPatient.setHistory(history.getText());
+		new DRNotesEntry(currentUser,currentVisit,currentStage,currentPatient);
 	}
 }

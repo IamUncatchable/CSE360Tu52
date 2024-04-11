@@ -40,6 +40,7 @@ public class User {
     
         public void setFirstName(String firstName) {
             this.firstName = firstName;
+            db.updateString(Datatables.USERS.get(), Columns.USERNAME.get(), username, Columns.FIRST_NAME.get(), firstName);
         }
     
         // Similar methods for other attributes...
@@ -69,6 +70,7 @@ public class User {
             if (isPasswordComplex(newPassword)) {
                 this.password = newPassword;
                 // Optionally save the user data
+                db.updateString(Datatables.USERS.get(), Columns.USERNAME.get(), username, Columns.PASSWORD.get(), password);
             }
         }
     

@@ -24,7 +24,7 @@ public class Patient {
     	db = new Database();
     }
     
-    public boolean newPatient() {
+    public boolean newPatient(String gender,String address,String city,String state,int zip,int phone,String email,int insuranceNumber,String insuranceProvider,String history,String firstName,String lastName,String birthday) {
     	return db.createPatient(gender, address, city, state, zip, phone, email, insuranceNumber, insuranceProvider, patientID, history,firstName,lastName,birthday);
     }
 	
@@ -53,6 +53,7 @@ public class Patient {
     
     public void setBirthday(String birthday) {
     	this.birthday = birthday;
+    	db.updateString(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), patientID, Columns.BIRTHDAY.get(), birthday);
     }
      
     public String getBirthday() {
@@ -62,6 +63,7 @@ public class Patient {
     //setter for first name
     public void setFirstName(String firstName) {
     	this.firstName = firstName;
+    	db.updateString(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), patientID, Columns.FIRST_NAME.get(), firstName);
     }
     
     //getter for first name
@@ -72,6 +74,7 @@ public class Patient {
     //setter for last name
     public void setLastName(String lastName) {
     	this.lastName = lastName;
+    	db.updateString(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), patientID, Columns.LAST_NAME.get(), lastName);
     }
     
     //getter for last name
@@ -82,6 +85,7 @@ public class Patient {
     // Setter for gender
     public void setGender(String gender) {
         this.gender = gender;
+        db.updateString(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), patientID, Columns.GENDER.get(), gender);
     }
 
     // Getter for gender
@@ -92,6 +96,7 @@ public class Patient {
     // Setter for address
     public void setAddress(String address) {
         this.address = address;
+        db.updateString(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), patientID, Columns.ADDRESS.get(), address);
     }
 
     // Getter for address
@@ -102,6 +107,7 @@ public class Patient {
     // Setter for city
     public void setCity(String city) {
         this.city = city;
+        db.updateString(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), patientID, Columns.CITY.get(), city);
     }
 
     // Getter for city
@@ -112,6 +118,7 @@ public class Patient {
     // Setter for state
     public void setState(String state) {
         this.state = state;
+        db.updateString(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), patientID, Columns.STATE.get(), state);
     }
 
     // Getter for state
@@ -122,6 +129,7 @@ public class Patient {
     // Setter for zip
     public void setZip(int zip) {
         this.zip = zip;
+        db.updateInt(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), patientID, Columns.ZIP.get(), zip);
     }
 
     // Getter for zip
@@ -132,6 +140,7 @@ public class Patient {
     // Setter for phone
     public void setPhone(int phone) {
         this.phone = phone;
+        db.updateInt(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), patientID, Columns.PHONE_NUMBER.get(), phone);
     }
 
     // Getter for phone
@@ -142,6 +151,7 @@ public class Patient {
     // Setter for email
     public void setEmail(String email) {
         this.email = email;
+        db.updateString(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), patientID, Columns.EMAIL.get(), email);
     }
 
     // Getter for email
@@ -152,6 +162,7 @@ public class Patient {
     // Setter for insurance number
     public void setInsuranceNumber(int insuranceNumber) {
         this.insuranceNumber = insuranceNumber;
+        db.updateInt(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), patientID, Columns.INSURANCE_ID.get(), insuranceNumber);
     }
 
     // Getter for insurance number
@@ -162,16 +173,12 @@ public class Patient {
     // Setter for insurance provider
     public void setInsuranceProvider(String insuranceProvider) {
         this.insuranceProvider = insuranceProvider;
+        db.updateString(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), patientID, Columns.INSURANCE_PROVIDER.get(), insuranceProvider);
     }
 
     // Getter for insurance provider
     public String getInsuranceProvider() {
         return insuranceProvider;
-    }
-
-    // Setter for patient ID
-    public void setPatientID(String patientID) {
-        this.patientID = patientID;
     }
 
     // Getter for patient ID
@@ -182,6 +189,7 @@ public class Patient {
     // Setter for history
     public void setHistory(String history) {
         this.history = history;
+        db.updateString(Datatables.PATIENT.get(), Columns.PATIENT_ID.get(), patientID, Columns.HISTORY.get(), history);
     }
 
     // Getter for history
