@@ -16,7 +16,7 @@ import javafx.scene.image.ImageView;
 import java.time.LocalDate;
 
 public class nurseNotesEntry {
-
+	private DashboardBase dashboardBase;
 	private Visit currentVisit;
 	private User currentUser;
 	private Stage currentStage;
@@ -66,7 +66,7 @@ public class nurseNotesEntry {
 		signout.getStyleClass().add("Button");
 		signout.setOnAction (new EventHandler<>() {
             public void handle(ActionEvent event) {
-            	new LoginScreen(currentStage);
+            	new LoginScreen(currentStage, dashboardBase);
             }
 		});
 		

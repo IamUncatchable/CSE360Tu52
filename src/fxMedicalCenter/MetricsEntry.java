@@ -14,7 +14,7 @@ import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 
 public class MetricsEntry {
-
+	private DashboardBase dashboardBase;
 	private Visit visit;
 	private User currentUser;
 	private Stage currentStage;
@@ -42,7 +42,7 @@ public class MetricsEntry {
 		signout.setAlignment(Pos.TOP_RIGHT);
 		signout.setOnAction (new EventHandler<>() {
             public void handle(ActionEvent event) {
-            	new LoginScreen(currentStage);
+            	new LoginScreen(currentStage, dashboardBase);
             }
 		});
 		center.getChildren().add(0,title);
