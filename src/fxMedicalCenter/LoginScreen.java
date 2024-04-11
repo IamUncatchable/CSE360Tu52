@@ -142,8 +142,8 @@ public class LoginScreen {
 		
 		switch(type){
 			case "doctor":
-				//DoctorsView drview = new DoctorsView();
-				//drview.start(currentStage);
+				DoctorsView drview = new DoctorsView();
+				drview.start(currentStage);
 				break;
 			case "nurse":
 				new NurseView(currentStage,currentUser);
