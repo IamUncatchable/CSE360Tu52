@@ -151,6 +151,7 @@ public class LoginScreen {
 				break;
 			case "patient":
 				DashboardBase dashboardBase = new DashboardBase(currentStage,currentUser, visit);
+				DashBoardBaseController controller = new DashBoardBaseController(dashboardBase);
 				Scene scene = new Scene(dashboardBase.getView(), 1366, 780);
 				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 				currentStage.setScene(scene);

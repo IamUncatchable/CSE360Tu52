@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 
 
 public class DashBoardBaseController {
-	private nurseNotesEntry nurseNotes;
 	private MyAccount myAccount;
 	private MyAppointments appointments;
 	private MessagesView messagesView;
@@ -21,11 +20,10 @@ public class DashBoardBaseController {
 	private DashboardView dashboardView;
 //	Map<String, PaneProvider> providers = new HashMap<>();
 	// Constructor
-	public DashBoardBaseController(DashboardBase dashboardBase, MessagesView messagesview, MyAppointments appointments, MyAccount myAccount, nurseNotesEntry nurseNotes) {
-		this.nurseNotes = nurseNotes;
-		this.myAccount = myAccount;
-		this.appointments = appointments;
-		this.messagesView = messagesview;
+	public DashBoardBaseController(DashboardBase dashboardBase) {
+		this.myAccount = new MyAccount(dashboardBase.getUser());
+		this.appointments = new MyAppointments(dashboardBase.getUser(),dashboardBase.getVisit());
+		this.messagesView = new MessagesView();
 		this.dashboardBase = dashboardBase;
 //		this.providers.putAll(providers);
 		this.dashboardView = new DashboardView();
@@ -65,7 +63,7 @@ public class DashBoardBaseController {
 		dashboardBase.getSignOutButton().setOnAction(e -> {
 			
 
-			//new LoginScreen(dashboardBase.getPrimaryStage(), this);
+			new LoginScreen(dashboardBase.getPrimaryStage());
 
 			// switchScene(DashboardEnumsRefactored.DASHBOARD.get());
 			// FIXME how to exit to the sign in screen?

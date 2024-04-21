@@ -14,7 +14,6 @@ import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 
 public class MetricsEntry {
-	private DashboardBase dashboardBase;
 	private Visit visit;
 	private User currentUser;
 	private Stage currentStage;

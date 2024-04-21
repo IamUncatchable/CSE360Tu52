@@ -16,7 +16,6 @@ import javafx.scene.image.ImageView;
 import java.time.LocalDate;
 
 public class nurseNotesEntry {
-	private DashboardBase dashboardBase;
 	private Visit currentVisit;
 	private User currentUser;
 	private Stage currentStage;

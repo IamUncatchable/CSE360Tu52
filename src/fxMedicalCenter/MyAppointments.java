@@ -96,7 +96,7 @@ public class MyAppointments {
         	date.set(newDate);
         }
 
-        public void setTime() {
+      /*  public void setTime() {
         }
 
         public void setProvider() {
@@ -104,7 +104,7 @@ public class MyAppointments {
 
         public void setReason() {
         }
-
+*/
         public String getDate() {
             return date.get();
         }

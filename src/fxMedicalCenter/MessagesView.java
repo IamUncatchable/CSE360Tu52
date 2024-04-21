@@ -18,7 +18,6 @@ import javafx.scene.layout.VBox;
 // apply scroll bar only where necessary on the central component
 public class MessagesView {
 	VBox centerContent = new VBox();
-	private MessagesController controller;
 
 	private static final String BUTTON_STYLE_LIGHT_GREEN = "button-light-green";
 	private static final String BUTTON_STYLE_DARK_GREEN = "button-dark-green";
